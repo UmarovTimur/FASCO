@@ -1,10 +1,130 @@
 //====================================================================================================
+.header {
+
+	// .header__container
+
+	&__container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 140px;
+		@include adaptiveValue('height',140,100,1280,767,98);
+		
+		@media screen and (max-width:$mobile) {
+			height: 92px;
+		}
+	}
+
+	// .header__logo
+
+	&__logo {
+
+		color: #484848;
+		font-family: Volkhov;
+		@include adaptiveValue('font-size',52,32);
+		
+		font-style: normal;
+		font-weight: 400;
+		line-height: 100%; /* 52px */
+
+		margin-right: 10px;
+		
+	}
+
+	// .header__menu
+
+	&__menu {
+		@media screen and (max-width:$mobile) {
+			position: fixed;
+			top: 0;
+			right: -100%;
+			width: auto;
+			height: calc(var(--vh,1vh) * 100);
+			background-color: var(--black);
+			padding: 70px 20px 30px 20px;
+			transition: all .5s ease 0s;
+
+			.menu-open & {
+				right: 0;
+			}
+		}
+	}
+
+	// .header__list
+
+	&__list {
+		
+		
+
+		@media screen and (min-width:$mobile) {
+			display: flex;
+			column-gap: 58px;
+			align-items: center;
+			@include adaptiveValue('column-gap',58,10,1280,479.98);
+
+		}
+	}
+
+	// .header__link
+
+	&__link {
+		& > a {
+			color: #484848;
+		}
+		@media screen and (max-width:$mobile) {
+			& > a {
+				color: var(--white);
+				font-size: 32px;
+				line-height: 120%;
+			}
+			&:not(:last-child) {
+				margin-bottom: 15px;
+			}
+		}
+		
+	}
+
+	// .header__button
+
+	&__button {
+		color: var(--white);
+		background-color: var(--black);
+		@include adaptiveValue('padding-top',20,10);
+		@include adaptiveValue('padding-bottom',20,10);
+
+		@include adaptiveValue('padding-right',45,25);
+		@include adaptiveValue('padding-left',45,25);
+		
+		border-radius: rem(10);
+		line-height: 100%;
+		box-shadow: 0px 20px 35px 0px rgba(0, 0, 0, 0.15);
+		transition: all .6s ease 0s;
+		@media screen and (hover:hover) {
+			&:hover {
+				
+			}
+		}
+	}
+
+
+	// .header__burger
+
+	&__burger {
+		display: none;
+
+		font-size: 16px;
+		@media screen and (max-width:$mobile) {
+			display: block;
+		}
+	}
+}
+.icon-menu {
+}
 
 //====================================================================================================
 
 //Burger
-/*
-.icon-menu {
+.icon-menu:not(.header__burger) {
 	display: none;
 	@media (max-width: $mobile) {
 		display: block;
@@ -13,7 +133,6 @@
 		height: rem(18);
 		cursor: pointer;
 		z-index: 5;
-		span,
 		&::before,
 		&::after {
 			content: "";
@@ -51,4 +170,3 @@
 		}
 	}
 }
-*/
