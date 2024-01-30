@@ -51,6 +51,8 @@
       "webpack-stream": "latest"
    },
    "dependencies": {
-      "-": "^0.0.1"
+      "-": "^0.0.1",
+      "gsap": "^3.12.5",
+      "scrolltrigger": "^1.0.1"
    }
 }

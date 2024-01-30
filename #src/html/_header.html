@@ -1,40 +1,49 @@
 <header class="header">
    <div class="header__container">
-      <a href="#" class="header__logo">FASCO</a>
+      <a tabindex="1" href="#" class="header__logo">FASCO</a>
       <nav data-fullscreen class="header__menu">
          <ul class="header__list">
-            <li class="header__link">
-               <a href="#">
-                  Home
-               </a>
-            </li>
-            <li class="header__link">
+            <li data-strength="30" class="header__link _magnets">
+               <a href="">Home</a>
+             </li>
+            <li data-strength="30" class="header__link _magnets" data-strength="30">
                <a href="#">
                   Deals
                </a>
             </li>
-            <li class="header__link">
+            <li data-strength="30" class="header__link _magnets">
                <a href="#">
                   New Arrivals
                </a>
             </li>
-            <li class="header__link">
+            <li data-strength="30" class="header__link _magnets">
                <a href="#">
                   Packages
                </a>
             </li>
-            <li class="header__link">
+            <li data-strength="30" class="header__link _magnets">
                <a href="#">
                   Sign in
                </a>
             </li>
-            <button class="header__button">
-               <a href="#">
-                  Sign Up
-               </a>
-            </button>
+            <div data-strength="25" data-strength-text="6" class="header__button _magnets">
+               <button class="header__button-content">
+                  <span class="_magnets-text" href="#">
+                     Sign Up  
+                  </span>
+               </button>
+            </div>
+            
          </ul>
       </nav>
-      <div class="header__burger icon-menu">.Menu</div>
+      <button tabindex="2" class="header__burger icon-menu">.Menu</button>
+      <button
+      data-strength="30"
+
+      tabindex="3"
+      class="header__fixed-burger icon-menu">
+         <div class="header__burger-text"></div>
+      </button>
+      
    </div>
 </header>
