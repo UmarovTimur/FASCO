@@ -64,17 +64,30 @@
 			align-items: center;
 			@include adaptiveValue('column-gap',58,10,1280,479.98);
 		}
+		@media screen and (max-width:$mobile) {
+			row-gap: 15px;
+		}
 	}
 
 	// .header__link
 
 	&__link {
-		@media screen and (hover:hover) {
-			margin: -20px;
-			padding: 20px;
+		@media screen and (min-width:$mobile) {
+			margin: -1.25rem;
+			padding: 1.25rem;
 		}
+		.touch & {
+			// padding: 0px;
+			// margin: 0px 0px 15px 0px;
+		}
+
 		& > a {
 			color: var(--gray);
+			@media (prefers-reduced-motion) and (hover:hover) {
+				&:hover {
+					text-decoration: underline;
+				}
+			}
 		}
 		@media screen and (max-width:$mobile) {
 			& > a {
@@ -82,8 +95,6 @@
 				color: var(--black);
 				// line-height: 120%;
 			}
-			margin-bottom: 15px;
-
 		}
 		
 	}

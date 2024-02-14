@@ -42,8 +42,11 @@
     &__list {
         display: flex;
         flex-wrap: wrap;
-        @include adaptiveValue('column-gap',34,20);
-        
+        row-gap: 10px;
+        @include adaptiveValue('column-gap',40,20);
+        @media screen and (max-width:$mobile) {
+            margin-bottom: 20px;
+        } 
     }
     
 
@@ -56,8 +59,8 @@
                 font-size: 14px;
             }
         }
-
-        margin-bottom: 10px;
+        padding: 15px;
+        margin: -15px;        
     }
 
     // .footer__license

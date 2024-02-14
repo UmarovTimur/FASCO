@@ -170,7 +170,7 @@ export function stickyBlock() {
 	}
 	stickyBlockInit();
 }
-// Модуль анімація цифрового лічильника
+// Модуль анімація цифрового счётчика
 export function digitsCounter() {
 
 	// Обнулення

@@ -1,5 +1,5 @@
 // Подключение списка активных модулей
-import { flsModules } from "./modules.js";
+// import { flsModules } from "./modules.js";
 
 /* Проверка поддержки webp, добавление класса webp или no-webp для HTML */
 export function isWebp() {
@@ -32,6 +32,11 @@ export function addLoadedClass() {
       }, 0);
    });
 }
+
+// Клонирование элемента в другой 
+export function clone(item, parent) {
+   return parent.appendChild(item.cloneNode(true));
+}
 // Получение хеша в адресе сайта
 export function getHash() {
    if (location.hash) { return location.hash.replace('#', ''); }
@@ -53,6 +58,10 @@ export function fullVHfix() {
       fixHeight();
    }
 }
+
+// Предпочтение анимаций в браузере
+export let IsReduceMotion = !window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
 // Вспомогательные модули плавного расскрытия и закрытия объекта ======================================================================================================================================================================
 export let _slideUp = (target, duration = 500, showmore = 0) => {
    if (!target.classList.contains('_slide')) {

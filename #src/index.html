@@ -6,12 +6,15 @@
 })
 
 <body>
-   <div id="smooth-wrapper" class="wrapper">
+      
+   </style>
+   <div class="_circle _circle__cursor"></div>
+   <div data-scroll-container id="smooth-wrapper" class="wrapper">
       @@include('html/_header.html',{})
-      <div class="_circle"></div>
-      <main id="smooth-content" class="page">
-         <!-- Cursor -->
-         <section class="ultimate-sale">
+      <!-- Cursor -->
+
+      <main  class="page">
+            <section class="ultimate-sale">
             <div class="ultimate-sale__container">
                <div class="ultimate-sale__item">
                   <img src="@img/1.png" alt="">
@@ -21,8 +24,8 @@
                   <img src="@img/4.png" alt="">
                </div>
                <div class="ultimate-sale__item">
-                  <h1 id="fit-text">ULTIMATE</h1>
-                  <h2 id="fit-text">SALE</h2>
+                  <h1>ULTIMATE</h1>
+                  <h2 >SALE</h2>
                   <h3>NEW COLLECTION</h3>
                   <div data-strength="25" data-strength-text="6" class="ultimate-sale__button _magnets">
                      <button class="ultimate-sale__button-content">
@@ -43,33 +46,43 @@
                </div>
                
             </div>
-         </section>
-         <section class="logos">
-            <div id="logos-slider" class="logos__items">
-               
-               <div class="logos__first">
-                  <a href="https://www.chanel.com/us/" class="logos__item">
-                     <img src="@img/logos/logo-2.png" alt="">
-                  </a>
-                  <a href="https://eu.louisvuitton.com/eng-e1/homepage" class="logos__item">
-                     <img src="@img/logos/logo-3.png" alt="">
-                  </a>
-                  <a href="https://www.prada.com/us/en.html" class="logos__item">
-                     <img src="@img/logos/logo-1.png" alt="">
-                  </a>
-                  <a href="https://www.calvinklein.us/en" class="logos__item">
-                     <img src="@img/logos/logo-4.png" alt="">
-                  </a>
-                  <a href="https://thedenimcompany.pk/" class="logos__item">
-                     <img src="@img/logos/logo.png" alt="">
-                  </a>
+            </section>
+            <div>
+            <section class="logos logos__container">
+               <div id="rolling-logos">
+                  <div id="rolling-logos-item" class="logos__items">
+                     <a href="https://www.chanel.com/us/" class="logos__item">
+                        <img src="@img/logos/logo-2.png" alt="">
+                     </a>
+                     <a href="https://eu.louisvuitton.com/eng-e1/homepage" class="logos__item">
+                        <img src="@img/logos/logo-3.png" alt="">
+                     </a>
+                     <a href="https://www.prada.com/us/en.html" class="logos__item">
+                        <img src="@img/logos/logo-1.png" alt="">
+                     </a>
+                     <a href="https://www.calvinklein.us/en" class="logos__item">
+                        <img src="@img/logos/logo-4.png" alt="">
+                     </a>
+                     <a href="https://thedenimcompany.pk/" class="logos__item">
+                        <img src="@img/logos/logo.png" alt="">
+                     </a>
                   </div>
 
+               </div>
+
+            </section>  
             </div>
-         </section>
             
-         </div>
+            <section class="locomotive__scroll locomotive__scroll__container"
+               data-scroll=""
+               data-scroll-direction="horizontal"
+               data-scroll-speed="4"
+               data-scroll-position="top">
+               <p>UltimateUltimate</p>
+               <p>UltimateUltimate</p>
+            </section>
       </main>
+      
       @@include('html/_footer.html',{})
    </div>
    @@include('html/_js.html',{})
