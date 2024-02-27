@@ -1,5 +1,5 @@
 // Подключение функционала "Чертогов Фрилансера"
-import { isMobile, IsReduceMotion, clone } from "./functions.js";
+import { isMobile, IsReduceMotion, clone, roll } from "./functions.js";
 // Подключение списка активных модулей
 // import { flsModules } from "./modules.js";
 // Подключение библиотеки для анимаций
@@ -12,22 +12,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 
-(function init() {
-  
-  
-  
-  
-
-  if (IsReduceMotion) {
-    // logosCarusel("#logos-slider","#logos-slider-item",8);
-    rollingText();
-
-    if (!isMobile.any()) {
-      circleCursor(0.15,120);//speed, smoothly
-      magnetLinks()
-    }
-  }
-})();
 
 
 
@@ -43,25 +27,37 @@ const scroll = new LocomotiveScroll({
   getDirection: true
 });
 
-ScrollTrigger.create({
-  trigger: document.querySelector('[data-scroll-container]'),
-
-  onUpdate: (self) => {
-    console.log(self.direction);
-    // if (caruselDirection !== self.direction) {
-      // caruselDirection *= -1;
-    // }
-  },
-});
 
 window.onresize = scroll.update();
-
-scroll.on("scroll", () => ScrollTrigger.update());
-
 
 ScrollTrigger.addEventListener("refresh", () => scroll.update());
 
 ScrollTrigger.refresh();
+
+
+
+(function init() {
+  
+  
+  
+  
+
+  if (IsReduceMotion) {
+    // logosCarusel("#logos-slider","#logos-slider-item",8);
+    rollingText();
+    rollingGallery();
+
+    if (!isMobile.any()) {
+      circleCursor(0.15,120);//speed, smoothly
+      magnetLinks();
+    }
+  }
+})();
+
+
+
+
+
 
 
 // Magnets button
@@ -71,7 +67,6 @@ function magnetLinks() {
 
   magnets.forEach((magnet) => {
     if (magnet.hasAttribute("data-strength-text")) {
-
       magnet.addEventListener('mousemove', textMoveMagnet );
       magnet.addEventListener('mouseout', function(event) {
         gsap.to( event.currentTarget, {
@@ -88,6 +83,16 @@ function magnetLinks() {
           ease: "elastic"})
         });
 
+    } else if (magnet.hasAttribute("data-vertical-magnets")) {
+      magnet.addEventListener('mousemove', verticalMoveMagnet );
+      magnet.addEventListener('mouseout', function(event) {
+        gsap.to( event.currentTarget, {
+          x: 0,
+          duration:1.5,
+          rotation: "0.001deg",
+          ease: "elastic"
+        })
+        });
     } else {
       magnet.addEventListener('mousemove', moveMagnet );
       magnet.addEventListener('mouseout', function(event) {
@@ -99,7 +104,7 @@ function magnetLinks() {
           ease: "elastic"
         })
         });
-      }
+    }
   });
   
   function moveMagnet(event) {
@@ -145,6 +150,19 @@ function magnetLinks() {
   
   
   //   magnetButton.style.transform = 'translate(' + (((( event.clientX - bounding.left)/(magnetButton.offsetWidth))) - 0.5) * strength + 'px,'+ (((( event.clientY - bounding.top)/(magnetButton.offsetHeight))) - 0.5) * strength + 'px)';
+  }
+
+  function verticalMoveMagnet(event) {
+    let magnetButton = event.currentTarget
+    let bounding = magnetButton.getBoundingClientRect();
+    let strength = magnetButton.getAttribute("data-strength");
+      
+    gsap.to( magnetButton, {
+      y: ((( event.clientY - bounding.top)/magnetButton.offsetHeight) - 0.5) * strength,
+      duration:1.5,
+      rotation: "0.001deg",
+      ease: "elastic"
+    });
   }
 }
 
@@ -234,92 +252,114 @@ function circleCursor(speed,smoothy) {
   // Scrolling Letters Both Direction
   // https://codepen.io/GreenSock/pen/rNjvgjo
   // Fixed example with resizing
-  // https://codepen.io/GreenSock/pen/QWqoKBv?editors=0010
+
 */
 // rolling-logos
 // rolling-logos-item
 // clone(sliderItem,sliderContainer);
 
 function rollingText() {
-  document.querySelector("#rolling-logos").classList.add("_rolling");
-  
-  let direction = 1;
-  
+  let rolling = document.getElementById("rolling-logos");
+  let rollingItem =document.querySelector("#rolling-logos-item");
+  let direction = -1;
+  let directionName = "down"; // top
 
-  const roll1 = roll("#rolling-logos",{duration:10},),
-        scroll = ScrollTrigger.create({
-          scroller: document.querySelector('[data-scroll-container]'),
-          // trigger: document.querySelector('[data-scroll-container]'),
-          onUpdate(self) {
-            if (self.direction !== direction) {
-              direction *= -1;
-              gsap.to(roll1, {timeScale: direction, overwrite: true});
-            }
+  
+  rolling.classList.add("_rolling");
+
+  
+    // if (rolling.clientWidth <= window.innerWidth) {
+    //   clone(rollingItem,rolling);
+    //   clone(rollingItem,rolling);
+    //   clone(rollingItem,rolling);
+    // } else {
+    //   clone(rollingItem,rolling);
+    //   clone(rollingItem,rolling);
+    //   clone(rollingItem,rolling);
+    // }
+
+  const roll1 = roll("#rolling-logos #rolling-logos-item", {duration: 14}),
+        updateScroll = scroll.on("scroll", (self) => {
+          const SelfDirection = self.direction == "down" ? -1 : 1;
+          if (self.direction != directionName) {
+            gsap.to(roll1, {timeScale: direction, overwrite: true});
+            directionName = self.direction;
+            direction = SelfDirection;
           }
         });
 
-        function roll(targets, vars, reverse) {
-          vars = vars || {};
-        
-          
-        }
+  
+
 }
 
 
 
 
 
+function rollingGallery() {
+  let direction = 1;
 
+  if (isMobile.any()) {
+    const galleryRolling = roll(".social__gallery .social__gallery-container", { duration: 13}),
+            scroll = ScrollTrigger.create({
+              onUpdate(self) {
+                if (-self.direction !== direction) {
+                  direction *= -1;
+                  gsap.to(galleryRolling, {timeScale: direction, overwrite: true});
+                }
+              }
+        
+      });
+      return galleryRolling;
+  }
 
-/**
-* Scrolltrigger Scroll Letters Home
-*/
-function initScrollLetters() {
-  // Scrolling Letters Both Direction
-  // https://codepen.io/GreenSock/pen/rNjvgjo
-  // Fixed example with resizing
-  // https://codepen.io/GreenSock/pen/QWqoKBv?editors=0010
+  let gallery = document.getElementById('gallery-rolling'),
+      galleryItem = document.getElementById('gallery-rolling-item'),
+      galleryItemEl = galleryItem.querySelector(".social__gallery"),
+      now = 1;
 
-  let direction = 1; // 1 = forward, -1 = backward scroll
-
-  const roll1 = roll(".big-name .name-wrap", {duration: 18}),
-        scroll = ScrollTrigger.create({
-          trigger: document.querySelector('[data-scroll-container]'),
-          onUpdate(self) {
-            if (self.direction !== direction) {
-              direction *= -1;
-              gsap.to(roll1, {timeScale: direction, overwrite: true});
-            }
+  let directionName = "down"; // top
+  
+  // clone(galleryItem,galleryItemEl);
+  
+  const galleryRolling = roll(".social__gallery .social__gallery-container", { duration: 15}),
+        updateScroll = scroll.on("scroll", (self) => {
+          const SelfDirection = self.direction == "down" ? 1 : -1;
+          if (self.direction != directionName) {
+            gsap.to(galleryRolling, {timeScale: direction, overwrite: true});
+            directionName = self.direction;
+            direction = SelfDirection;
           }
         });
 
-  // helper function that clones the targets, places them next to the original, then animates the xPercent in a loop to make it appear to roll across the screen in a seamless loop.
-  function roll(targets, vars, reverse) {
-    vars = vars || {};
-    vars.ease || (vars.ease = "none");
-    const tl = gsap.timeline({
-      repeat: -1,
-      onReverseComplete() { 
-        this.totalTime(this.rawTime() + this.duration() * 10); // otherwise when the playhead gets back to the beginning, it'd stop. So push the playhead forward 10 iterations (it could be any number)
-      }
-    }), 
-    elements = gsap.utils.toArray(targets),
-    clones = elements.map(el => {
-      let clone = el.cloneNode(true);
-      el.parentNode.appendChild(clone);
-      return clone;
-    }),
-    positionClones = () => elements.forEach((el, i) => gsap.set(clones[i], {position: "absolute", overwrite: false, top: el.offsetTop, left: el.offsetLeft + (reverse ? -el.offsetWidth : el.offsetWidth)}));
-    positionClones();
-    elements.forEach((el, i) => tl.to([el, clones[i]], {xPercent: reverse ? 100 : -100, ...vars}, 0));
-    window.addEventListener("resize", () => {
-      let time = tl.totalTime(); // record the current time
-      tl.totalTime(0); // rewind and clear out the timeline
-      positionClones(); // reposition
-      tl.totalTime(time); // jump back to the proper time
-    });
-    return tl;
-  }
 
+  gallery.addEventListener('mousemove', (event) => {
+    const step = event.screenX <= window.innerWidth / 2 ? 1 : -1;
+    const timeScale = (event.screenX - window.innerWidth / 2) / (window.innerWidth / 2);
+    
+    gsap.to(galleryItem, {
+      scale:1.05,
+    });
+    gsap.to(galleryRolling, {
+      timeScale: step + timeScale * -1.5,
+      overwrite: true,
+    });
+  });
+
+  gallery.addEventListener('mouseenter', (event) => {
+    
+    // now = 400 * (event.screenX / window.innerWidth - 0.5) * 2;
+
+  });
+  gallery.addEventListener('mouseleave', (event) => {
+    gsap.to(galleryRolling, {
+      timeScale: event.screenX <= window.innerWidth / 2 ? 1 : -1,
+      overwrite: true
+    });
+    gsap.to(galleryItem, {
+      scale:1,
+    });
+  });
+  
 }
 
