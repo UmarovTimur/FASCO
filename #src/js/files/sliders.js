@@ -33,7 +33,7 @@ function initSliders() {
 			// observe: true,
 			// observeParents: true,
 			// Optional parameters
-			slidesPerView: 1.5,
+			slidesPerView: 1.67,
 			centeredSlides: !0,
 			// spaceBetween: 0,
 			autoHeight: true,
@@ -51,7 +51,7 @@ function initSliders() {
 				rotate: 0,
 				scale: 1,
 
-				stretch: 10,
+				stretch: 7,
 				depth: 8,
 				modifier: 50,
 				slideShadows: 0,
