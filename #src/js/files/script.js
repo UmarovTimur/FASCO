@@ -39,6 +39,9 @@ ScrollTrigger.refresh();
 (function init() {
 
 
+  window.addEventListener("resize", (e) => {
+    productsTitlesAnimation();
+  });
   productsTitlesAnimation();
 
   if (IsReduceMotion) {
@@ -265,9 +268,12 @@ function rollingText() {
   let direction = -1;
   let directionName = "down"; // top
 
+  if (!rolling) {
+    console.error("Cannot find rollingText");
+    return;
+  }
 
   rolling.classList.add("_rolling");
-
 
   // if (rolling.clientWidth <= window.innerWidth) {
   //   clone(rollingItem,rolling);
@@ -316,8 +322,11 @@ function rollingGallery() {
 
   let gallery = document.getElementById('gallery-rolling'),
     galleryItem = document.getElementById('gallery-rolling-item'),
-    galleryItemEl = galleryItem.querySelector(".social__gallery"),
     now = 1;
+
+  if (!gallery) {
+    return console.error("Cannot find rollingGallery");
+  }
 
   let directionName = "down"; // top
 
@@ -360,19 +369,25 @@ function rollingGallery() {
     gsap.to(galleryItem, {
       scale: 1,
     });
-    galleryRolling.pause();
+    // galleryRolling.pause();
   });
-  galleryRolling.pause();
+  // galleryRolling.pause();
 
 }
 
 
 function productsTitlesAnimation() {
 
-  const mobileSortIcon = document.querySelector(".products__catalog-mobile-icon");
+  const mobileSortIcon = document.querySelector(".products__catalog-mobile");
   const mobileMenutList = document.querySelector(".products__catalog");
   const productTitlesList = [...document.querySelectorAll('#productsCard')];
   let currentCatalog = document.querySelector(".products__catalog-item-current > button");
+
+  if (!mobileSortIcon) {
+    console.error("Cannot find the mobileSortIcon")
+    return;
+  }
+
 
   if (window.innerWidth <= 991.98) {
     gsap.to(mobileMenutList, {
@@ -394,7 +409,7 @@ function productsTitlesAnimation() {
       } else {
         gsap.to(mobileMenutList, {
           y: mobileMenutList.offsetHeight,
-          duration: .5,
+          duration: .3,
           ease: "sine.in",
         });
       }
@@ -421,6 +436,8 @@ function productsTitlesAnimation() {
       y: 0,
     });
   }
+
+
 
   let activeCard;
 

@@ -681,9 +681,9 @@ export function roll(targets, vars, reverse) {
 
    positionClones();
    elements.forEach((el, i) => {
-      tl.to([el, clones[i]], { x: reverse ? el.offsetWidth : -el.offsetWidth, ...vars }, 0);
+      tl.to([el, clones[i]], { x: reverse ? el.offsetWidth : -el.offsetWidth, ...vars, y: 0 }, 0);
 
-      // tl.to([el, clones[i]], {xPercent: reverse ? 100 : -100, ...vars}, 0);
+      // tl.to([el, clones[i]], { xPercent: reverse ? 100 : -100, ...vars }, 0);
    });
 
    window.addEventListener("resize", () => {

@@ -13,6 +13,7 @@
    "author": "FLS",
    "license": "ISC",
    "devDependencies": {
+      "css-loader": "^6.10.0",
       "del": "^6.1.1",
       "fs": "latest",
       "gulp": "latest",
