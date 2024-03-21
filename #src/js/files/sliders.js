@@ -33,9 +33,9 @@ function initSliders() {
 			// observe: true,
 			// observeParents: true,
 			// Optional parameters
-			slidesPerView: 1.67,
+			slidesPerView: 1.01,
 			centeredSlides: !0,
-			// spaceBetween: 0,
+			// spaceBetween: 10,
 			autoHeight: true,
 			speed: 800,
 
@@ -51,8 +51,8 @@ function initSliders() {
 				rotate: 0,
 				scale: 1,
 
-				stretch: 7,
-				depth: 8,
+				stretch: -1,
+				depth: 6,
 				modifier: 50,
 				slideShadows: 0,
 
@@ -81,27 +81,48 @@ function initSliders() {
 			},
 
 			// Брейкпоинты
-			/*
 			breakpoints: {
-				320: {
-					slidesPerView: 1,
-					spaceBetween: 0,
-					autoHeight: true,
+				480: {
+					slidesPerView: 1.1,
+
+					coverflowEffect: {
+						stretch: 6,
+						depth: 2,
+						modifier: 50,
+						slideShadows: 0,
+					},
 				},
 				768: {
-					slidesPerView: 2,
-					spaceBetween: 20,
+					slidesPerView: 1.2,
+
+					coverflowEffect: {
+						stretch: 6,
+						depth: 2,
+						modifier: 50,
+						slideShadows: 0,
+					},
 				},
 				992: {
-					slidesPerView: 3,
-					spaceBetween: 20,
+					slidesPerView: 1.2,
+
+					coverflowEffect: {
+						stretch: 6,
+						depth: 2,
+						modifier: 40,
+					},
 				},
-				1268: {
-					slidesPerView: 4,
-					spaceBetween: 30,
-				},
+				1460: {
+					slidesPerView: 1.67,
+					coverflowEffect: {
+
+						stretch: 7,
+						depth: 8,
+						modifier: 50,
+						slideShadows: 0,
+
+					},
+				}
 			},
-			*/
 			// События
 			on: {
 				init: function () {
