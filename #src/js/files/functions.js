@@ -676,7 +676,6 @@ export function roll(targets, vars, reverse) {
             top: el.offsetTop,
             left: el.offsetLeft + (reverse ? -el.offsetWidth : el.offsetWidth)
          })
-
       });
 
    positionClones();

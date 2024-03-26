@@ -46,7 +46,8 @@ ScrollTrigger.refresh();
 
   if (IsReduceMotion) {
     rollingText();
-    rollingGallery();
+    // rollingGallery();
+    socialRolling();
 
     if (!isMobile.any()) {
       circleCursor(0.15, 120);//speed, smoothly
@@ -91,7 +92,7 @@ function magnetLinks() {
       magnet.addEventListener('mousemove', verticalMoveMagnet);
       magnet.addEventListener('mouseout', function (event) {
         gsap.to(event.currentTarget, {
-          x: 0,
+          y: 0,
           duration: 1.5,
           rotation: "0.001deg",
           ease: "elastic"
@@ -184,6 +185,7 @@ function circleCursor(speed, smoothy) {
   const mouse = { x: 0, y: 0 }; // Track current mouse position
   const previousMouse = { x: 0, y: 0 } // Store the previous mouse position
   const circle = { x: 0, y: 0 }; // Track the circle position
+  let scale = 1;
 
   // Initialize variables to track scaling and rotation
   let currentScale = 0; // Track current scale value
@@ -330,7 +332,7 @@ function rollingGallery() {
 
   let directionName = "down"; // top
 
-  // clone(galleryItem,galleryItemEl);
+  // clone(galleryItem, galleryItemEl);
 
   const galleryRolling = roll(".social__gallery .social__gallery-container", { duration: 15 }),
     updateScroll = scroll.on("scroll", (self) => {
@@ -359,7 +361,6 @@ function rollingGallery() {
   gallery.addEventListener('mouseenter', (event) => {
     galleryRolling.play();
     // now = 400 * (event.screenX / window.innerWidth - 0.5) * 2;
-
   });
   gallery.addEventListener('mouseleave', (event) => {
     gsap.to(galleryRolling, {
@@ -376,12 +377,92 @@ function rollingGallery() {
 }
 
 
+function socialRolling() {
+  let direction = 1;
+  let directionName = "down"; // top
+
+
+  let gallery = document.getElementById('gallery-rolling'),
+    galleryItem = document.getElementById('gallery-rolling-item');
+
+  if (!gallery) {
+    return console.error("Cannot find rollingGallery");
+  }
+
+  clone(galleryItem, gallery);
+  if (galleryItem.offsetWidth < window.innerWidth) {
+    clone(galleryItem, gallery);
+  }
+  console.log(galleryItem.offsetWidth);
+
+
+
+  const sociallRoll = roll(galleryItem, { duration: 10, ease: "none" }),
+    rollUpdate = scroll.on("scroll", (self) => {
+      const SelfDirection = self.direction == "down" ? 1 : -1;
+      if (self.direction != directionName) {
+        gsap.to(sociallRoll, { timeScale: direction, overwrite: true });
+        directionName = self.direction;
+        direction = SelfDirection;
+      }
+    });
+
+
+  function roll(element, option, update) {
+    option = option || {};
+    option.ease || (option.ease == "none");
+
+    let timeline = gsap.timeline({
+      repeat: -1,
+      onReverseComplete() {
+        this.totalTime(this.rawTime() + this.duration() * 10); // otherwise when the playhead gets back to the beginning, it'd stop. So push the playhead forward 10 iterations (it could be any number)
+      }
+    });
+
+    timeline.to(gallery, {
+      x: update ? element.offsetWidth : -element.offsetWidth,
+      ...option,
+      y: 0
+    });
+
+    return timeline;
+  }
+
+
+
+
+  gallery.addEventListener('mousemove', (event) => {
+    const step = event.screenX <= window.innerWidth / 2 ? 1 : -1;
+    const timeScale = (event.screenX - window.innerWidth / 2) / (window.innerWidth / 2);
+
+    gsap.to(sociallRoll, {
+      timeScale: step + timeScale * -1.5,
+      overwrite: true,
+    });
+  });
+
+  gallery.addEventListener('mouseenter', (event) => {
+    // sociallRoll.play();
+    // now = 400 * (event.screenX / window.innerWidth - 0.5) * 2;
+  });
+  gallery.addEventListener('mouseleave', (event) => {
+    gsap.to(sociallRoll, {
+      timeScale: event.screenX <= window.innerWidth / 2 ? 1 : -1,
+      overwrite: true
+    });
+
+    // galleryRolling.pause();
+  });
+
+
+}
+
 function productsTitlesAnimation() {
 
   const mobileSortIcon = document.querySelector(".products__catalog-mobile");
   const mobileMenutList = document.querySelector(".products__catalog");
   const productTitlesList = [...document.querySelectorAll('#productsCard')];
-  let currentCatalog = document.querySelector(".products__catalog-item-current > button");
+  let currentCatalog = document.querySelector(".products__catalog-item-current > .products__catalog-item");
 
   if (!mobileSortIcon) {
     console.error("Cannot find the mobileSortIcon")
@@ -390,29 +471,34 @@ function productsTitlesAnimation() {
 
 
   if (window.innerWidth <= 991.98) {
-    gsap.to(mobileMenutList, {
-      y: mobileMenutList.offsetWidth,
-      opacity: 1
-    });
+    // gsap.to(mobileMenutList, {
+    //   y: mobileMenutList.offsetWidth,
+    //   opacity: 1
+    // });
 
     mobileSortIcon.addEventListener("click", event => {
       mobileSortIcon.classList.toggle('_active');
       mobileMenutList.classList.toggle('_active');
 
-
-      if (mobileMenutList.classList.contains('_active')) {
-        gsap.to(mobileMenutList, {
-          y: 0,
-          duration: .5,
-          ease: "power1.out",
-        });
-      } else {
-        gsap.to(mobileMenutList, {
-          y: mobileMenutList.offsetHeight,
-          duration: .3,
-          ease: "sine.in",
-        });
-      }
+      document.addEventListener("click", event => {
+        if (!event.target.closest(".products__catalog") && !event.target.closest(".products__catalog-item-current") && !event.target.closest(".products__catalog-mobile-icon")) {
+          mobileMenutList.classList.remove('_active');
+          document.removeEventListener("click", event => { }, false);
+        }
+      });
+      // if (mobileMenutList.classList.contains('_active')) {
+      //   gsap.to(mobileMenutList, {
+      //     y: 0,
+      //     duration: .5,
+      //     ease: "power1.out",
+      //   });
+      // } else {
+      //   gsap.to(mobileMenutList, {
+      //     y: mobileMenutList.offsetHeight,
+      //     duration: .3,
+      //     ease: "sine.in",
+      //   });
+      // }
 
     });
     productTitlesList.forEach(index => {
@@ -422,19 +508,18 @@ function productsTitlesAnimation() {
         if (!el.classList.contains("_tab-active")) {
           mobileMenutList.classList.remove('_active');
           currentCatalog.innerHTML = el.querySelector("button").textContent;
-          console.log(el.querySelector("button").textContent);
 
-          gsap.to(mobileMenutList, {
-            y: mobileMenutList.offsetHeight,
-            duration: 1,
-          });
+          // gsap.to(mobileMenutList, {
+          //   y: mobileMenutList.offsetHeight,
+          //   duration: 1,
+          // });
         }
       });
     })
   } else {
-    gsap.to(mobileMenutList, {
-      y: 0,
-    });
+    // gsap.to(mobileMenutList, {
+    //   y: 0,
+    // });
   }
 
 
