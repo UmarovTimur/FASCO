@@ -134,6 +134,25 @@ function initSliders() {
 
 
 	}
+	if (document.querySelector('#timerSlider')) {
+		const customersSlider = new Swiper('#timerSlider', {
+
+
+			spaceBetween: 24,
+			slidesPerView: 1.6,
+			loop: !0,
+
+
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true,
+			},
+			navigation: {
+				prevEl: '.timer__slider-button-prev .swiper-button-prev',
+				nextEl: '.timer__slider-button-next .swiper-button-next',
+			},
+		});
+	}
 }
 // Скролл на базе слайдера (по классу swiper_scroll для оболочки слайдера)
 function initSlidersScroll() {

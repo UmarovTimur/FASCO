@@ -1,1 +1,73 @@
 // Заголовки, общие БЄМ блоки и проче...
+._circle {
+    @media screen and (hover:hover) {
+        --circle-size: 40px;
+        position: fixed;
+        z-index: 50;
+        height: var(--circle-size);
+        width: var(--circle-size);
+        border: 1px solid var(--gray);
+        border-radius: 100%;
+        top: calc(var(--circle-size) / 2 * -1);
+        left: calc(var(--circle-size) / 2 * -1);
+        pointer-events: none;
+    }
+}
+
+
+._button {
+
+    display: inline-block;
+
+    color: var(--white);
+
+
+
+    // _button-content
+
+    &-content {
+
+        // padding: 20px 70px;
+        width: 207px;
+        height: 56px;
+        @include adaptiveValue('width', 207, 170, 1280, 480);
+        @include adaptiveValue('height', 56, 45);
+
+
+        // @include adaptiveValue('padding-top', 20, 12, 1280, 480);
+        // @include adaptiveValue('padding-bottom', 20, 12, 1280, 480);
+        // @include adaptiveValue('padding-left', 60, 36, 1280, 480);
+        // @include adaptiveValue('padding-right', 60, 36, 1280, 480);
+
+        &-content {
+            font-size: 16px;
+
+            @media screen and (max-width:$tablet) {
+                font-size: 12px;
+            }
+        }
+
+
+        @media screen and (max-width:$mobileMedium) {
+            width: 100%;
+            padding: 12px 5px;
+        }
+
+        background-color: var(--black);
+        border-radius: 10px;
+    }
+
+    @media screen and (hover:hover) {
+        margin: -10px;
+        padding: 10px;
+    }
+
+}
+
+
+h3 {
+    @include adaptiveValue('font-size', 46, 28);
+    margin-bottom: em(20, 48);
+    font-family: Volkhov;
+    color: var(--gray);
+}

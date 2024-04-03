@@ -200,6 +200,13 @@ function circleCursor(speed, smoothy) {
   window.addEventListener('mouseout', (e) => {
     circleElement.style.display = "none";
   });
+
+  window.addEventListener("mousedown", (e) => {
+    scale = .9;
+  });
+  window.addEventListener("mouseup", (e) => {
+    scale = 1;
+  });
   // Smoothing factor for cursor movement speed (0 = smoother, 1 = instant)
 
 
@@ -231,7 +238,7 @@ function circleCursor(speed, smoothy) {
     // 4. Smoothly update the current scale
     currentScale += (scaleValue - currentScale) * speed;
     // 5. Create a transformation string for scaling
-    const scaleTransform = `scale(${1 + currentScale}, ${1 - currentScale})`;
+    const scaleTransform = `scale(${(1 + currentScale) * scale}, ${(1 - currentScale) * scale})`;
 
     // ROTATE
     // 1. Calculate the angle using the atan2 function
@@ -469,82 +476,48 @@ function productsTitlesAnimation() {
     return;
   }
 
-
   if (window.innerWidth <= 991.98) {
-    // gsap.to(mobileMenutList, {
-    //   y: mobileMenutList.offsetWidth,
-    //   opacity: 1
-    // });
+    document.addEventListener("click", event => {
 
-    mobileSortIcon.addEventListener("click", event => {
-      mobileSortIcon.classList.toggle('_active');
-      mobileMenutList.classList.toggle('_active');
+      if (event.target.closest(".products__catalog-mobile-icon") || event.target.closest(".products__catalog-item-current")) {
+        mobileSortIcon.classList.toggle('_active');
+        mobileMenutList.classList.toggle('_active');
+      }
 
-      document.addEventListener("click", event => {
-        if (!event.target.closest(".products__catalog") && !event.target.closest(".products__catalog-item-current") && !event.target.closest(".products__catalog-mobile-icon")) {
-          mobileMenutList.classList.remove('_active');
-          document.removeEventListener("click", event => { }, false);
-        }
-      });
-      // if (mobileMenutList.classList.contains('_active')) {
-      //   gsap.to(mobileMenutList, {
-      //     y: 0,
-      //     duration: .5,
-      //     ease: "power1.out",
-      //   });
-      // } else {
-      //   gsap.to(mobileMenutList, {
-      //     y: mobileMenutList.offsetHeight,
-      //     duration: .3,
-      //     ease: "sine.in",
-      //   });
-      // }
 
-    });
-    productTitlesList.forEach(index => {
+      let button = event.target.closest(".#productsCard");
 
-      index.addEventListener("click", event => {
-        let el = event.target.closest("#productsCard");
-        if (!el.classList.contains("_tab-active")) {
+      if (button) {
+
+        // console.log(button.classList.contains("_tab-active"));
+        // console.log(button);
+        // let el = event.target.closest("#productsCard");
+        if (!button.classList.contains("_tab-active")) {
           mobileMenutList.classList.remove('_active');
           currentCatalog.innerHTML = el.querySelector("button").textContent;
-
-          // gsap.to(mobileMenutList, {
-          //   y: mobileMenutList.offsetHeight,
-          //   duration: 1,
-          // });
+          mobileSortIcon.classList.remove('_active');
         }
-      });
-    })
-  } else {
-    // gsap.to(mobileMenutList, {
-    //   y: 0,
+      }
+    });
+
+    // document.addEventListener("click", event => {
+    //   if (!event.target.closest(".products__catalog") && !event.target.closest(".products__catalog-item-current") && !event.target.closest(".products__catalog-mobile-icon")) {
+    //     mobileMenutList.classList.remove('_active');
+    //     document.removeEventListener("click", event => { }, false);
+    //   }
     // });
+    // productTitlesList.forEach(index => {
+
+    //   index.addEventListener("click", event => {
+    //     let el = event.target.closest("#productsCard");
+    //     if (!el.classList.contains("_tab-active")) {
+    //       mobileMenutList.classList.remove('_active');
+    //       currentCatalog.innerHTML = el.querySelector("button").textContent;
+    //     }
+    //   });
+    // })
   }
-
-
 
   let activeCard;
 
-  // catalogList.forEach(card => {
-  //   if (card.classList.contains("_active")) {
-  //     activeCard = card
-  //   }
-
-
-  //   card.addEventListener("click", event => {
-  //     let el = event.target.closest('#productsCard');
-
-  //     console.log(activeCard);
-
-  //     if (!el.classList.contains('_active')) {
-  //       el.classList.add('_active')
-  //       activeCard.classList.remove('_active');
-  //       activeCard = el;
-
-  //     }
-
-  //   })
-
-  // })
 }

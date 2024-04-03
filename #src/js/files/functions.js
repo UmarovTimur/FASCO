@@ -426,9 +426,13 @@ export function tabs() {
 export function menuInit() {
    if (document.querySelector(".icon-menu")) {
       document.addEventListener("click", function (e) {
-         if (bodyLockStatus && e.target.closest('.icon-menu')) {
+         // bodyLockStatus && !e.target.closest('.header__menu') && !document.documentElement.classList.contains("menu-open")
+         if (e.target.closest('.icon-menu')) {
             bodyLockToggle();
             document.documentElement.classList.toggle("menu-open");
+         } else if (bodyLockStatus && !e.target.closest('.header__menu')) {
+            bodyUnlock();
+            document.documentElement.classList.remove("menu-open");
          }
       });
    };

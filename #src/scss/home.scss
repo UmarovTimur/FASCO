@@ -7,12 +7,12 @@
 
     &__container {
         display: grid;
-        gap: 20px;
+        gap: 35px;
         @include adaptiveValue('gap', 20, 12, 1280, 768);
 
         @media screen and (min-width:$mobile) {
             grid-auto-flow: column;
-            grid-template-rows: auto 1fr auto;
+            grid-template-rows: minmax(145px, auto) minmax(383, 1fr) minmax(145px, auto);
             grid-template-columns: repeat(3, 1fr);
         }
 
@@ -72,7 +72,8 @@
         }
     }
 
-    & h3 {
+    & h4 {
+        font-family: Poppins;
         text-align: center;
         letter-spacing: em(2, 20);
 
@@ -90,6 +91,8 @@
     // .ultimate-sale__item
 
     &__item {
+        // position: relative;
+
         & img {
             border-radius: 10px;
             max-width: 100%;
@@ -210,51 +213,28 @@
     // .ultimate-sale__button
 
     &__button {
-
-        display: inline-block;
-
-        color: var(--white);
+        @media screen and (max-width:$pc) {
+            font-size: 14px;
+        }
 
         @media screen and (max-width:$mobileMedium) {
             width: 100%;
         }
-
-        // .ultimate-sale__button-content
-
-        &-content {
-
-            padding: 20px 60px;
-
-            @include adaptiveValue('padding-top', 20, 12, 1280, 480);
-            @include adaptiveValue('padding-bottom', 20, 12, 1280, 480);
-            @include adaptiveValue('padding-left', 60, 36, 1280, 480);
-            @include adaptiveValue('padding-right', 60, 36, 1280, 480);
-
-
-            font-size: 16px;
-
-            @media screen and (max-width:$mobileMedium) {
-                width: 100%;
-                padding: 12px 5px;
-            }
-
-            background-color: var(--black);
-            border-radius: 10px;
-        }
-
-        @media screen and (hover:hover) {
-            margin: -10px;
-            padding: 10px;
-        }
-
-
-
     }
 }
 
 // ============================================================================================================================================================================================================================================================================================================================================================================================
 
 .logos {
+
+    box-shadow: 0px 20px 20px #f0f0f0;
+    @include adaptiveValue('margin-bottom', 100, 25);
+
+
+
+
+    &__wrapper {}
+
 
     & .logos__items {
         @include adaptiveValue('padding-top', 80, 20);
@@ -324,6 +304,170 @@
     }
 }
 
+
+
+// ============================================================================================================================================================================================================================================================================================================================================================================================
+
+
+.timer {
+
+    // .timer__container
+
+    &__container {
+        display: flex;
+    }
+
+    // .timer__body
+
+    &__body {
+        flex: 0 0 566px;
+    }
+
+    // .timer__text
+
+    &__text {}
+
+    // .timer__title
+
+    &__title {}
+
+    // .timer__subtitle
+
+    &__subtitle {
+        @include adaptiveValue('margin-bottom', 40, 20);
+        font-size: 16px;
+        color: var(--gray-text);
+        line-height: em(26, 16);
+        max-width: 438px;
+        display: inline-block;
+    }
+
+    // .timer__button
+
+    &__button {
+        @include adaptiveValue('margin-bottom', 50, 20);
+
+    }
+
+    // .timer__button-content
+
+    &__button-content {}
+
+    // .timer__clock
+
+    &__clock {}
+
+    // .timer__clock-title
+
+    &__clock-title {
+        font-size: 28px;
+        font-weight: 500;
+        margin-bottom: em(15, 28);
+    }
+
+    // .timer__clock-container
+
+    &__clock-container {
+        display: flex;
+        text-align: center;
+        column-gap: 30px;
+    }
+
+    // .timer__clock-count
+
+    &__clock-count {
+        font-family: DigitalNumbers;
+        font-size: 32px;
+        margin-bottom: 15px;
+        box-shadow: 0px 5px 14px rgb(211, 211, 211);
+        border-radius: 10px;
+        padding: em(22, 32) em(12, 32);
+    }
+
+    // .timer__clock-name
+
+    &__clock-name {
+        font-size: 24px;
+
+        @media screen and (max-width:$tablet) {
+            font-size: 21px;
+        }
+
+        @media screen and (max-width:$mobile) {
+            font-size: 18px;
+        }
+    }
+
+    // .timer__slider
+
+    &__slider {}
+
+    // .timer__slider-conatiner
+
+    &__slider-conatiner {
+        overflow: visible;
+    }
+
+    // .timer__slider-item
+
+    &__slider-item {
+        position: relative;
+        height: 582px;
+        width: 404px;
+
+        &>img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    // .timer__slider-item-body
+
+    &__slider-item-body {
+        position: absolute;
+        left: 24px;
+        bottom: 24px;
+        padding: 32px 24px;
+        background-color: var(--white);
+    }
+
+    // .timer__slider-item-name
+
+    &__slider-item-name {
+        line-height: 150%;
+
+        & img {
+            transform: translate(0px, 10px);
+            margin: 0px 5px;
+        }
+
+    }
+
+    // .timer__slider-item-sale
+
+    &__slider-item-sale {
+        font-size: 28px;
+        line-height: 120%;
+    }
+
+    // .timer__slider-navigtaion
+
+    &__slider-navigtaion {}
+
+    // .timer__slider-button-prev
+
+    &__slider-button-prev,
+    &__slider-button-next {}
+
+    // .timer__slider-button-next
+
+    &__slider-button-next {}
+}
+
 // ============================================================================================================================================================================================================================================================================================================================================================================================
 
 .products {
@@ -334,10 +478,8 @@
     // .products__title
 
     &__title {
-        @include adaptiveValue('font-size', 46, 28);
-        margin-bottom: em(20, 48);
         text-align: center;
-        font-family: Volkhov;
+
     }
 
     // .products__text
@@ -676,6 +818,105 @@
 }
 
 
+
+
+// ============================================================================================================================================================================================================================================================================================================================================================================================
+
+
+
+.benefits {
+    @include adaptiveValue('padding-top', 72, 25);
+    @include adaptiveValue('padding-bottom', 72, 25);
+    box-shadow: 0px 20px 20px #f0f0f0;
+    @include adaptiveValue('margin-bottom', 150, 50);
+    background-color: var(--white);
+
+
+
+    // .benefits__container
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+
+
+
+        @media screen and (max-width:$tablet) {
+            flex-wrap: wrap;
+        }
+    }
+
+    // .benefits__item
+
+    &__item {
+        // flex: 0 1 25%;
+        display: flex;
+        align-items: center;
+
+        @media screen and (max-width:$tablet) {
+            flex: 0 1 calc(50% - 10px);
+        }
+
+    }
+
+    // .benefits__item-img
+
+    &__item-img {
+        flex-grow: 0;
+        flex-shrink: 0;
+        // flex-basis: auto;
+        @include adaptiveValue('flex-basis', 50, 30);
+        margin-right: 13px;
+
+        & img {
+            max-width: 100%;
+        }
+
+        // @media screen and (max-width:$pc) {
+
+        // }
+    }
+
+    // .benefits__item-body
+
+    &__item-body {
+        // flex: 1 1 auto;
+    }
+
+    // .benefits__item-title
+
+    &__item-title {
+        font-size: 20px;
+        font-weight: 500;
+        text-wrap: nowrap;
+        line-height: em(30, 20);
+
+        @media screen and (max-width:$pc) {
+            font-size: 18px;
+        }
+
+        @media screen and (max-width:$mobile) {
+            font-size: 18px;
+        }
+    }
+
+    // .benefits__item-text
+
+    &__item-text {
+        font-size: 16px;
+        line-height: em(26, 16);
+
+        @media screen and (max-width:$pc) {
+            font-size: 14px;
+        }
+
+        @media screen and (max-width:$mobile) {
+            font-size: 14px;
+        }
+    }
+}
+
 // ============================================================================================================================================================================================================================================================================================================================================================================================
 .social {
 
@@ -685,11 +926,7 @@
     // .social__title
 
     &__title {
-        @include adaptiveValue('font-size', 46, 28);
-        margin-bottom: em(20, 48);
         text-align: center;
-        font-family: Volkhov;
-        color: var(--gray);
     }
 
     // .social__text
@@ -812,11 +1049,8 @@
     // .customers__title
 
     &__title {
-        @include adaptiveValue('font-size', 46, 28);
-        margin-bottom: em(20, 48);
         text-align: center;
-        font-family: Volkhov;
-        color: var(--gray);
+
     }
 
     // .customers__subtitle
@@ -868,6 +1102,7 @@
         justify-content: center;
         align-items: center;
         top: 0;
+        overflow: hidden;
 
         background-color: var(--white);
         box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.16);
@@ -878,12 +1113,40 @@
             display: none;
         }
 
+        &::before {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 100%;
+            bottom: 0%;
+            left: 0%;
+            background-color: var(--gray);
+            z-index: 3;
+            border-radius: 50%;
+            transform-origin: top;
+            transition: all .5s ease 0s;
+            transform: scale(0);
+
+        }
+
+        @media screen and (hover:hover) {
+            &:hover {
+                &::before {
+                    // bottom: 0;
+                    transform: scale(1);
+                    transform-origin: bottom;
+                }
+            }
+        }
+
+
         & span {
             position: relative;
             display: inline-block;
             font-size: 16px;
             width: em(8.22, 16);
             height: em(16, 16);
+            z-index: 4;
         }
 
         & span::after {
