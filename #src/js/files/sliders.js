@@ -23,6 +23,8 @@ EffectFade, Lazy, Manipulation
 // Полный набор стилей из node_modules
 // import 'swiper/css';
 
+import circleCursor from "./script.js";
+
 function initSliders() {
 	if (document.querySelector('.customers__slider')) {
 		// Создаем слайдер
@@ -134,14 +136,16 @@ function initSliders() {
 
 
 	}
+
 	if (document.querySelector('#timerSlider')) {
 		const customersSlider = new Swiper('#timerSlider', {
 
-
+			autoHeight: false,
+			parallax: true,
 			spaceBetween: 24,
-			slidesPerView: 1.6,
+			slidesPerView: 2.1,
 			loop: !0,
-
+			speed: 800,
 
 			pagination: {
 				el: '.swiper-pagination',
@@ -151,8 +155,28 @@ function initSliders() {
 				prevEl: '.timer__slider-button-prev .swiper-button-prev',
 				nextEl: '.timer__slider-button-next .swiper-button-next',
 			},
+
+
+			breakpoints: {
+				480: {
+
+				},
+				768: {
+
+				},
+				992: {
+
+				},
+				1460: {
+					allowTouchMove: false,
+
+				}
+			},
 		});
 	}
+	const timerSliderItem = document.querySelector('.timer__slider-item');
+	document.querySelector('.timer__slider-pagination').style.left = `${timerSliderItem.offsetWidth + 24}px`;
+
 }
 // Скролл на базе слайдера (по классу swiper_scroll для оболочки слайдера)
 function initSlidersScroll() {

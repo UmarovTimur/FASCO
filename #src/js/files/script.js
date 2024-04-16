@@ -176,7 +176,7 @@ function magnetLinks() {
  * YouTube Tutorial:
  * https://youtu.be/wG_5453Vq98
   */
-function circleCursor(speed, smoothy) {
+export default function circleCursor(speed, smoothy) {
 
   // Select the circle element
   const circleElement = document.querySelector('._circle');
