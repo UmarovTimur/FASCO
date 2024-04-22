@@ -169,7 +169,6 @@ function initSliders() {
 				},
 				1460: {
 					allowTouchMove: false,
-
 				}
 			},
 		});

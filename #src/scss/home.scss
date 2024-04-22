@@ -335,7 +335,8 @@
 
     &__text {
         display: flex;
-        flex-direction: column
+        flex-direction: column;
+        align-items: start;
     }
 
     // .timer__title
@@ -530,34 +531,40 @@
         width: auto !important;
         display: flex;
         align-items: center;
+        column-gap: 15px;
+        pointer-events: none;
 
         & .swiper-pagination-bullet {
+            margin: 0 !important;
             background-color: var(--gray);
             width: 11px;
             height: 11px;
 
-            &.swiper-pagination-bullet-active {
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
                 width: 27px;
                 height: 27px;
-                transition: all .8s ease 0s;
-
                 background-color: transparent;
-                border: 1px solid var(--black);
-                padding: 8px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                border-radius: 50%;
 
+            }
+
+            &.swiper-pagination-bullet-active {
                 &::before {
-                    content: '';
-                    flex: 0 0 11px;
-                    border-radius: 50%;
-                    height: 11px;
-                    background-color: var(--black);
+                    border: 1px solid var(--black);
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-13.5px, -13.5px);
                 }
+
+                background-color: var(--black);
             }
         }
     }
+
 
     // .timer__slider-navigtaion
 
@@ -566,16 +573,17 @@
         z-index: 6;
         display: flex;
         justify-content: space-between;
+        column-gap: 15px;
 
         @media screen and (min-width:$tablet) {
-            transform: translate(calc(-100% - 30px), 0px);
+            transform: translate(calc(-100% - 30px), -10px);
             left: 0;
             bottom: 0;
             width: 115px !important;
             height: 50px;
         }
 
-        top: 50%;
+        // top: 50%;
         left:0px;
         width: 100%;
         transform: translate(0, -50%);
@@ -1197,7 +1205,7 @@
     // .customers__slider-wrapper
 
     &__slider-wrapper {
-        @include adaptiveValue('margin-bottom', 60, 20);
+        @include adaptiveValue('margin-bottom', 40, 20);
 
     }
 

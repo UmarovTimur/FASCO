@@ -52,6 +52,7 @@ ScrollTrigger.refresh();
     if (!isMobile.any()) {
       circleCursor(0.15, 120);//speed, smoothly
       magnetLinks();
+      circleFillAnimation();
     }
   }
 
@@ -400,7 +401,6 @@ function socialRolling() {
   if (galleryItem.offsetWidth < window.innerWidth) {
     clone(galleryItem, gallery);
   }
-  console.log(galleryItem.offsetWidth);
 
 
 
@@ -520,4 +520,56 @@ function productsTitlesAnimation() {
 
   let activeCard;
 
+}
+
+
+function circleFillAnimation() {
+  const elements = document.querySelectorAll('#_circleFill');
+  const duration = .4;
+  const scale = 0.4;
+
+  elements.forEach((element) => {
+    let backround = document.createElement('div');
+    backround.classList.add('_circleFillBackground');
+    element.prepend(backround);
+    let animationOn = false;
+    gsap.to(backround, {
+      duration: 0,
+      scale: scale,
+    })
+
+    element.addEventListener('mouseenter', (event) => {
+
+      gsap.to(backround, {
+        duration: 0,
+        yPercent: 0,
+        scale: scale,
+      })
+      gsap.to(backround, {
+        duration: duration,
+        yPercent: -70,
+        scale: 1,
+      })
+
+      // console.log("enter")
+    });
+
+
+    element.addEventListener('mouseout', (event) => {
+
+      gsap.to(backround, {
+        duration: duration,
+        yPercent: -140,
+        scale: scale,
+      })
+      gsap.to(backround, {
+        duration: 0,
+        yPercent: 0,
+        delay: duration,
+        scale: scale,
+      })
+
+      // console.log("out")
+    });
+  })
 }
