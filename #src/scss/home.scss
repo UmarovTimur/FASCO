@@ -314,10 +314,9 @@
     // .timer__container
 
     &__container {
-        display: flex;
-
-        @media screen and (max-width:$tablet) {
-            flex-direction: column;
+        @media screen and (min-width:$tablet) {
+            display: flex;
+            justify-content: space-between;
         }
     }
 
@@ -325,10 +324,20 @@
 
     &__body {
         flex: 0 0 566px;
+
         @include adaptiveValue('flex-basis', 566, 350, $maxWidthContainer, 991.98);
         padding-right: 10px;
         position: relative;
         z-index: 6;
+
+        @include adaptiveValue('margin-bottom', 40, 20, 991.98, 320);
+
+        @media screen and (max-width:$tablet) and (min-width:$mobile) {
+            display: flex;
+            justify-content: space-between;
+            column-gap: 15px;
+        }
+
     }
 
     // .timer__text
@@ -337,6 +346,10 @@
         display: flex;
         flex-direction: column;
         align-items: start;
+
+        @media screen and (max-width:$tablet) {
+            align-items: stretch;
+        }
     }
 
     // .timer__title
@@ -375,9 +388,11 @@
     // .timer__clock-title
 
     &__clock-title {
-        font-size: 28px;
         font-weight: 500;
         margin-bottom: em(15, 28);
+        @include adaptiveValue('font-size', 28, 24);
+
+
     }
 
     // .timer__clock-container
@@ -385,14 +400,20 @@
     &__clock-container {
         display: flex;
         text-align: center;
-        column-gap: 30px;
+        @include adaptiveValue('column-gap', 30, 15);
+
     }
+
+    // .timer__clock-item
+
+    &__clock-item {}
 
     // .timer__clock-count
 
     &__clock-count {
         font-family: DigitalNumbers;
-        font-size: 32px;
+        @include adaptiveValue('font-size', 32, 24);
+
         margin-bottom: 15px;
         box-shadow: 0px 5px 14px rgb(211, 211, 211);
         border-radius: 10px;
@@ -417,6 +438,9 @@
 
     &__slider {
         position: relative;
+        flex: 0 1 880px;
+
+
 
         &::before {
             position: absolute;
@@ -436,8 +460,11 @@
     // .timer__slider-flex-container
 
     &__slider-flex-container {
-        width: 880px;
-        overflow: visible;
+
+        @media screen and (min-width:$tablet) {
+            overflow: visible;
+            width: 880px;
+        }
 
         // overflow: visible;
     }
@@ -445,6 +472,15 @@
     // .timer__slider-conatiner
 
     &__slider-conatiner {
+        @media screen and (max-width:$tablet) {
+            padding-bottom: 40px;
+        }
+
+        @media screen and (max-width:$mobile) {
+            padding-bottom: 30px;
+        }
+
+
         overflow: visible;
     }
 
@@ -454,6 +490,12 @@
         position: relative;
         height: 582px;
         width: 404px;
+
+        @media screen and (max-width:$mobileSmall) {
+            width: 270px;
+            height: 460px;
+        }
+
         // transition: all .8s ease 0s;
 
         &.swiper-slide-active {
@@ -500,6 +542,8 @@
         bottom: 24px;
         padding: 32px 24px;
         background-color: var(--white);
+
+        @media screen and (max-width:$tablet) {}
     }
 
     // .timer__slider-item-name
@@ -533,6 +577,12 @@
         align-items: center;
         column-gap: 15px;
         pointer-events: none;
+
+        @media screen and (max-width:$tablet) {
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+        }
+
 
         & .swiper-pagination-bullet {
             margin: 0 !important;
@@ -574,6 +624,11 @@
         display: flex;
         justify-content: space-between;
         column-gap: 15px;
+
+        @media screen and (max-width:$tablet) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
 
         @media screen and (min-width:$tablet) {
             transform: translate(calc(-100% - 30px), -10px);
@@ -955,9 +1010,6 @@
 
 
 // ============================================================================================================================================================================================================================================================================================================================================================================================
-
-
-
 .benefits {
     @include adaptiveValue('padding-top', 72, 25);
     @include adaptiveValue('padding-bottom', 72, 25);
@@ -979,6 +1031,7 @@
         @media screen and (max-width:$tablet) {
             flex-wrap: wrap;
         }
+
     }
 
     // .benefits__item
@@ -990,6 +1043,10 @@
 
         @media screen and (max-width:$tablet) {
             flex: 0 1 calc(50% - 10px);
+        }
+
+        @media screen and (max-width:$mobileSmall) {
+            flex: 1 1 100%;
         }
 
     }
@@ -1157,9 +1214,6 @@
 }
 
 // ============================================================================================================================================================================================================================================================================================================================================================================================
-
-
-
 .customers {
     background-color: #FAFAFA;
     @include adaptiveValue('padding-top', 100, 30);
@@ -1339,7 +1393,5 @@
 
     &__position {}
 }
-
-
 
 // ============================================================================================================================================================================================================================================================================================================================================================================================

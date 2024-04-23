@@ -140,6 +140,12 @@ h3 {
 }
 
 #_circleFill {
+    overflow: hidden;
+
+    &>* {
+        pointer-events: none;
+    }
+
     & span {
         pointer-events: none;
     }
@@ -150,8 +156,10 @@ h3 {
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 70%;
+    top: 100%;
     left: 0;
-    background-color: var(--gray);
+    // background-color: var(--black);
+    backdrop-filter: invert(100%);
     border-radius: 50%;
+    z-index: 5;
 }

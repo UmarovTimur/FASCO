@@ -1,5 +1,5 @@
 // Подключение функционала "Чертогов Фрилансера"
-import { isMobile, IsReduceMotion, clone, roll } from "./functions.js";
+import { isMobile, IsReduceMotion, clone, roll, bodyLock, bodyLockToggle } from "./functions.js";
 // Подключение списка активных модулей
 // import { flsModules } from "./modules.js";
 // Подключение библиотеки для анимаций
@@ -43,7 +43,7 @@ ScrollTrigger.refresh();
     productsTitlesAnimation();
   });
   productsTitlesAnimation();
-
+  timer()
   if (IsReduceMotion) {
     rollingText();
     // rollingGallery();
@@ -482,16 +482,13 @@ function productsTitlesAnimation() {
       if (event.target.closest(".products__catalog-mobile-icon") || event.target.closest(".products__catalog-item-current")) {
         mobileSortIcon.classList.toggle('_active');
         mobileMenutList.classList.toggle('_active');
+        bodyLockToggle();
       }
 
 
-      let button = event.target.closest(".#productsCard");
+      let button = event.target.closest("#productsCard");
 
       if (button) {
-
-        // console.log(button.classList.contains("_tab-active"));
-        // console.log(button);
-        // let el = event.target.closest("#productsCard");
         if (!button.classList.contains("_tab-active")) {
           mobileMenutList.classList.remove('_active');
           currentCatalog.innerHTML = el.querySelector("button").textContent;
@@ -525,51 +522,97 @@ function productsTitlesAnimation() {
 
 function circleFillAnimation() {
   const elements = document.querySelectorAll('#_circleFill');
-  const duration = .4;
-  const scale = 0.4;
+  const duration = .3;
+  const scale = 1;
 
   elements.forEach((element) => {
     let backround = document.createElement('div');
     backround.classList.add('_circleFillBackground');
     element.prepend(backround);
-    let animationOn = false;
-    gsap.to(backround, {
-      duration: 0,
-      scale: scale,
-    })
+    // let animationOn = false;
+
+    let tl = gsap.timeline()
+
 
     element.addEventListener('mouseenter', (event) => {
+      tl.clear();
+      tl.to(backround, { yPercent: 0, duration: 0 })
+      tl.to(backround, { yPercent: -100, duration: duration })
 
-      gsap.to(backround, {
-        duration: 0,
-        yPercent: 0,
-        scale: scale,
-      })
-      gsap.to(backround, {
-        duration: duration,
-        yPercent: -70,
-        scale: 1,
-      })
-
-      // console.log("enter")
+      console.log("enter")
     });
 
 
     element.addEventListener('mouseout', (event) => {
 
-      gsap.to(backround, {
-        duration: duration,
-        yPercent: -140,
-        scale: scale,
-      })
-      gsap.to(backround, {
-        duration: 0,
-        yPercent: 0,
-        delay: duration,
-        scale: scale,
-      })
+      tl.to(backround, { yPercent: -203, duration: duration })
 
-      // console.log("out")
+      console.log("out")
     });
   })
+}
+
+
+function timer() {
+  let timer = {
+    sec: document.getElementById('timerSeconds'),
+    min: document.getElementById('timerMinutes'),
+    hour: document.getElementById('timerHours'),
+    day: document.getElementById('timerDays'),
+  }
+
+  function seconds() {
+    setTimeout(() => {
+      if (+timer.sec.innerHTML <= 0) {
+        minutes();
+        timer.sec.innerHTML = 60
+      } else {
+        timer.sec.innerHTML = +timer.sec.innerHTML - 1;
+        if (+timer.sec.innerHTML < 10) {
+          timer.sec.innerHTML = `0${timer.sec.innerHTML}`;
+        }
+      }
+      seconds()
+    }, '1000  ')
+  }
+
+  function minutes() {
+    if (+timer.min.innerHTML <= 0) {
+      hours();
+      timer.min.innerHTML = 60
+    } else {
+      timer.min.innerHTML = +timer.min.innerHTML - 1;
+      if (+timer.min.innerHTML < 10) {
+        timer.min.innerHTML = `0${timer.min.innerHTML}`;
+      }
+    }
+
+  }
+
+  function hours() {
+    if (+timer.hour.innerHTML <= 0) {
+      days();
+      timer.hour.innerHTML = 24
+    } else {
+      timer.hour.innerHTML = +timer.hour.innerHTML - 1;
+      if (+timer.hour.innerHTML < 10) {
+        timer.hour.innerHTML = `0${timer.hour.innerHTML}`;
+      }
+    }
+  }
+
+  function days() {
+    if (+timer.day.innerHTML <= 0) {
+      hours();
+      timer.day.innerHTML = 2
+    } else {
+      timer.day.innerHTML = +timer.day.innerHTML - 1;
+      if (+timer.day.innerHTML < 10) {
+        timer.day.innerHTML = `0${timer.day.innerHTML}`;
+      }
+    }
+  }
+
+  seconds()
+
 }

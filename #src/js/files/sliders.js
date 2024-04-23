@@ -139,14 +139,10 @@ function initSliders() {
 
 	if (document.querySelector('#timerSlider')) {
 		const customersSlider = new Swiper('#timerSlider', {
-
 			autoHeight: false,
 			parallax: true,
-			spaceBetween: 24,
-			slidesPerView: 2.1,
 			loop: !0,
 			speed: 800,
-
 			pagination: {
 				el: '.swiper-pagination',
 				clickable: true,
@@ -155,26 +151,32 @@ function initSliders() {
 				prevEl: '.timer__slider-button-prev .swiper-button-prev',
 				nextEl: '.timer__slider-button-next .swiper-button-next',
 			},
+			spaceBetween: 24,
+
+			slidesPerView: 'auto',
+			centeredSlides: true,
+
 
 
 			breakpoints: {
 				480: {
-
+					// slidesPerView: 'auto',
+					// centeredSlides: true,
 				},
 				768: {
-
 				},
 				992: {
-
+					slidesPerView: 2.1,
+					centeredSlides: false,
 				},
-				1460: {
-					allowTouchMove: false,
-				}
+
 			},
 		});
 	}
-	const timerSliderItem = document.querySelector('.timer__slider-item');
-	document.querySelector('.timer__slider-pagination').style.left = `${timerSliderItem.offsetWidth + 24}px`;
+	if (window.innerWidth > 991.98) {
+		const timerSliderItem = document.querySelector('.timer__slider-item');
+		document.querySelector('.timer__slider-pagination').style.left = `${timerSliderItem.offsetWidth + 24}px`;
+	}
 
 }
 // Скролл на базе слайдера (по классу swiper_scroll для оболочки слайдера)

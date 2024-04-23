@@ -142,14 +142,14 @@ export let _slideToggle = (target, duration = 500) => {
 }
 // Вспомогательные модули блокировки прокрутки и скочка ====================================================================================================================================================================================================================================================================================
 export let bodyLockStatus = true;
-export let bodyLockToggle = (delay = 500) => {
+export let bodyLockToggle = (delay = 0) => {
    if (document.documentElement.classList.contains('lock')) {
       bodyUnlock(delay);
    } else {
       bodyLock(delay);
    }
 }
-export let bodyUnlock = (delay = 500) => {
+export let bodyUnlock = (delay = 0) => {
    let body = document.querySelector("body");
    if (bodyLockStatus) {
       let lock_padding = document.querySelectorAll("[data-lp]");
