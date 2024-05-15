@@ -1,5 +1,5 @@
 // Подключение функционала "Чертогов Фрилансера"
-import { isMobile, IsReduceMotion, clone, roll, bodyLock, bodyLockToggle } from "./functions.js";
+import { isMobile, IsReduceMotion, clone, roll, bodyLock, bodyUnlock, bodyLockToggle } from "./functions.js";
 // Подключение списка активных модулей
 // import { flsModules } from "./modules.js";
 // Подключение библиотеки для анимаций
@@ -21,43 +21,42 @@ gsap.registerPlugin(ScrollTrigger);
  * https://github.com/locomotivemtl/locomotive-scroll
 
 */
-const scroll = new LocomotiveScroll({
+// const scroll = new LocomotiveScroll({
+//   el: document.querySelector('[data-scroll-container]'),
+//   smooth: true,
+//   getDirection: true
+// });
+
+
+let scroll = new LocomotiveScroll({
   el: document.querySelector('[data-scroll-container]'),
   smooth: true,
   getDirection: true
 });
 
 
-window.onresize = scroll.update();
-
-ScrollTrigger.addEventListener("refresh", () => scroll.update());
-
-ScrollTrigger.refresh();
-
-
-
-(function init() {
-
-
+window.addEventListener("load", function (e) {
   window.addEventListener("resize", (e) => {
     productsTitlesAnimation();
+    scroll.update();
   });
   productsTitlesAnimation();
-  timer()
-  if (IsReduceMotion) {
+  timer();
+
+  ScrollTrigger.addEventListener("refresh", () => scroll.update());
+  scroll.update();
+
+  if (IsReduceMotion) { // Animation preference
     rollingText();
-    // rollingGallery();
     socialRolling();
 
-    if (!isMobile.any()) {
-      circleCursor(0.15, 120);//speed, smoothly
+    if (!isMobile.any()) { // for Desktop
+      circleCursor(0.15, 120); //speed, smoothly
       magnetLinks();
       circleFillAnimation();
     }
   }
-
-})();
-
+});
 
 
 
@@ -177,7 +176,7 @@ function magnetLinks() {
  * YouTube Tutorial:
  * https://youtu.be/wG_5453Vq98
   */
-export default function circleCursor(speed, smoothy) {
+function circleCursor(speed, smoothy) {
 
   // Select the circle element
   const circleElement = document.querySelector('._circle');
@@ -309,82 +308,6 @@ function rollingText() {
 
 }
 
-
-
-
-
-function rollingGallery() {
-  let direction = 1;
-
-  if (isMobile.any()) {
-    const galleryRolling = roll(".social__gallery .social__gallery-container", { duration: 13 }),
-      scroll = ScrollTrigger.create({
-        onUpdate(self) {
-          if (-self.direction !== direction) {
-            direction *= -1;
-            gsap.to(galleryRolling, { timeScale: direction, overwrite: true });
-          }
-        }
-
-      });
-    return galleryRolling;
-  }
-
-  let gallery = document.getElementById('gallery-rolling'),
-    galleryItem = document.getElementById('gallery-rolling-item'),
-    now = 1;
-
-  if (!gallery) {
-    return console.error("Cannot find rollingGallery");
-  }
-
-  let directionName = "down"; // top
-
-  // clone(galleryItem, galleryItemEl);
-
-  const galleryRolling = roll(".social__gallery .social__gallery-container", { duration: 15 }),
-    updateScroll = scroll.on("scroll", (self) => {
-      const SelfDirection = self.direction == "down" ? 1 : -1;
-      if (self.direction != directionName) {
-        gsap.to(galleryRolling, { timeScale: direction, overwrite: true });
-        directionName = self.direction;
-        direction = SelfDirection;
-      }
-    });
-
-
-  gallery.addEventListener('mousemove', (event) => {
-    const step = event.screenX <= window.innerWidth / 2 ? 1 : -1;
-    const timeScale = (event.screenX - window.innerWidth / 2) / (window.innerWidth / 2);
-
-    gsap.to(galleryItem, {
-      scale: 1.05,
-    });
-    gsap.to(galleryRolling, {
-      timeScale: step + timeScale * -1.5,
-      overwrite: true,
-    });
-  });
-
-  gallery.addEventListener('mouseenter', (event) => {
-    galleryRolling.play();
-    // now = 400 * (event.screenX / window.innerWidth - 0.5) * 2;
-  });
-  gallery.addEventListener('mouseleave', (event) => {
-    gsap.to(galleryRolling, {
-      timeScale: event.screenX <= window.innerWidth / 2 ? 1 : -1,
-      overwrite: true
-    });
-    gsap.to(galleryItem, {
-      scale: 1,
-    });
-    // galleryRolling.pause();
-  });
-  // galleryRolling.pause();
-
-}
-
-
 function socialRolling() {
   let direction = 1;
   let directionName = "down"; // top
@@ -404,8 +327,11 @@ function socialRolling() {
 
 
 
+
+
   const sociallRoll = roll(galleryItem, { duration: 10, ease: "none" }),
     rollUpdate = scroll.on("scroll", (self) => {
+      console.log(self.scroll);
       const SelfDirection = self.direction == "down" ? 1 : -1;
       if (self.direction != directionName) {
         gsap.to(sociallRoll, { timeScale: direction, overwrite: true });
@@ -466,56 +392,40 @@ function socialRolling() {
 
 function productsTitlesAnimation() {
 
-  const mobileSortIcon = document.querySelector(".products__catalog-mobile");
-  const mobileMenutList = document.querySelector(".products__catalog");
-  const productTitlesList = [...document.querySelectorAll('#productsCard')];
-  let currentCatalog = document.querySelector(".products__catalog-item-current > .products__catalog-item");
+  const productOpenButton = document.querySelector(".products__catalog-item-current");
+  const productOpenIcon = document.querySelector(".products__catalog-mobile-icon");
 
-  if (!mobileSortIcon) {
-    console.error("Cannot find the mobileSortIcon")
-    return;
-  }
-
-  if (window.innerWidth <= 991.98) {
-    document.addEventListener("click", event => {
-
-      if (event.target.closest(".products__catalog-mobile-icon") || event.target.closest(".products__catalog-item-current")) {
-        mobileSortIcon.classList.toggle('_active');
-        mobileMenutList.classList.toggle('_active');
-        bodyLockToggle();
-      }
+  let currentCatalog = document.querySelector(".products__catalog-item._tab-active");
+  const productsCatalog = document.querySelector(".products__catalog");
 
 
-      let button = event.target.closest("#productsCard");
+  // if (!mobileSortIcon) {
+  //   console.error("Cannot find the mobileSortIcon")
+  //   return;
+  // }
 
-      if (button) {
-        if (!button.classList.contains("_tab-active")) {
-          mobileMenutList.classList.remove('_active');
-          currentCatalog.innerHTML = el.querySelector("button").textContent;
-          mobileSortIcon.classList.remove('_active');
-        }
-      }
-    });
+  // if (window.innerWidth <= 991.98) {
+  //   document.addEventListener("click", event => {
 
-    // document.addEventListener("click", event => {
-    //   if (!event.target.closest(".products__catalog") && !event.target.closest(".products__catalog-item-current") && !event.target.closest(".products__catalog-mobile-icon")) {
-    //     mobileMenutList.classList.remove('_active');
-    //     document.removeEventListener("click", event => { }, false);
-    //   }
-    // });
-    // productTitlesList.forEach(index => {
+  //     if (event.target.closest('.products__catalog-item-current') || event.target.closest('.products__catalog-mobile-icon')) {
+  //       productsCatalog.classList.toggle('_active');
+  //       bodyLockToggle();
+  //     } else if (!event.target.closest('.products__catalog') && productsCatalog.classList.contains('_active')) {
 
-    //   index.addEventListener("click", event => {
-    //     let el = event.target.closest("#productsCard");
-    //     if (!el.classList.contains("_tab-active")) {
-    //       mobileMenutList.classList.remove('_active');
-    //       currentCatalog.innerHTML = el.querySelector("button").textContent;
-    //     }
-    //   });
-    // })
-  }
 
-  let activeCard;
+  //       productsCatalog.classList.toggle('_active');
+  //       bodyLockToggle();
+  //     } else if (event.target.closest('.products__catalog-item') && event.target.closest('.products__catalog-item') != currentCatalog) {
+  //       currentCatalog = event.target.closest('.products__catalog-item');
+  //       productsCatalog.classList.toggle('_active');
+  //       bodyLockToggle();
+  //     }
+
+
+  //   });
+
+  // }
+
 
 }
 
@@ -538,16 +448,12 @@ function circleFillAnimation() {
       tl.clear();
       tl.to(backround, { yPercent: 0, duration: 0 })
       tl.to(backround, { yPercent: -100, duration: duration })
-
-      console.log("enter")
     });
 
 
     element.addEventListener('mouseout', (event) => {
 
       tl.to(backround, { yPercent: -203, duration: duration })
-
-      console.log("out")
     });
   })
 }

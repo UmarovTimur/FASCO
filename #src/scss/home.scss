@@ -228,7 +228,7 @@
 .logos {
 
     box-shadow: 0px 20px 20px #f0f0f0;
-    @include adaptiveValue('margin-bottom', 100, 25);
+    // @include adaptiveValue('margin-bottom', 100, 25);
 
 
 
@@ -313,6 +313,14 @@
 
     // .timer__container
 
+    --timerBg: #fafafa;
+    background-color: var(--timerBg);
+    @include adaptiveValue('padding-top', 150, 25);
+    @include adaptiveValue('padding-bottom', 150, 35);
+    @include adaptiveValue('margin-bottom', 150, 25);
+
+
+
     &__container {
         @media screen and (min-width:$tablet) {
             display: flex;
@@ -326,9 +334,12 @@
         flex: 0 0 566px;
 
         @include adaptiveValue('flex-basis', 566, 350, $maxWidthContainer, 991.98);
-        padding-right: 10px;
         position: relative;
         z-index: 6;
+
+        @media screen and (min-width:$tablet) {
+            padding-right: 10px;
+        }
 
         @include adaptiveValue('margin-bottom', 40, 20, 991.98, 320);
 
@@ -402,22 +413,48 @@
         text-align: center;
         @include adaptiveValue('column-gap', 30, 15);
 
+        @media screen and (max-width:$mobileMedium) {
+            width: 100%;
+        }
+
     }
 
     // .timer__clock-item
 
-    &__clock-item {}
+    &__clock-item {
+        @media screen and (max-width:$mobileMedium) {
+            flex: 0 1 25%;
+        }
+    }
 
     // .timer__clock-count
 
     &__clock-count {
         font-family: DigitalNumbers;
-        @include adaptiveValue('font-size', 32, 24);
 
         margin-bottom: 15px;
         box-shadow: 0px 5px 14px rgb(211, 211, 211);
         border-radius: 10px;
-        padding: em(22, 32) em(12, 32);
+
+        @media screen and (min-width:em($maxWidthContainer)) {
+            font-size: 32px;
+        }
+
+        @media screen and (min-width:$mobileMedium) {
+            padding: em(22, 32) em(12, 32);
+        }
+
+        @include adaptiveValue('font-size', 32, 24, 1280, 549.98);
+
+        @media screen and (max-width:$mobileMedium) {
+            padding-top: 5vw;
+            padding-bottom: 5vw;
+            font-size: 28px;
+        }
+
+        @media screen and (max-width:$mobileSmall) {
+            font-size: 21px;
+        }
     }
 
     // .timer__clock-name
@@ -450,7 +487,7 @@
             height: 102%;
             top: 0;
             right: 100%;
-            background-color: var(--white);
+            background-color: var(--timerBg);
         }
 
         // flex: 0 1 400px;
@@ -498,11 +535,23 @@
 
         // transition: all .8s ease 0s;
 
+        & .timer__slider-item-container {}
+
+        // .timer__slider-item-image
+
+        .timer__slider-item-image {
+            position: absolute;
+            transition: all .8s ease 0s;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 86%;
+            object-fit: cover;
+        }
+
         &.swiper-slide-active {
-            & .timer__slider-item-container {
-                & img {
-                    height: 100% !important;
-                }
+            .timer__slider-item-image {
+                height: 100%;
             }
         }
 
@@ -523,15 +572,7 @@
         overflow: hidden;
 
 
-        &>img {
-            position: absolute;
-            transition: all .8s ease 0s;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 86%;
-            object-fit: cover;
-        }
+        &>img {}
     }
 
     // .timer__slider-item-body
@@ -540,7 +581,12 @@
         position: absolute;
         left: 24px;
         bottom: 24px;
-        padding: 32px 24px;
+        max-width: 80%;
+        @include adaptiveValue('padding-top', 32, 20);
+        @include adaptiveValue('padding-bottom', 32, 20);
+        @include adaptiveValue('padding-left', 24, 15);
+        @include adaptiveValue('padding-right', 24, 15);
+
         background-color: var(--white);
 
         @media screen and (max-width:$tablet) {}
@@ -556,6 +602,10 @@
             margin: 0px 5px;
         }
 
+        @media screen and (max-width:$mobileSmall) {
+            font-size: 14px;
+        }
+
     }
 
     // .timer__slider-item-sale
@@ -563,6 +613,10 @@
     &__slider-item-sale {
         font-size: 28px;
         line-height: 120%;
+
+        @media screen and (max-width:$mobileSmall) {
+            font-size: 21px;
+        }
     }
 
 
@@ -660,9 +714,10 @@
 // ============================================================================================================================================================================================================================================================================================================================================================================================
 
 .products {
+    @include adaptiveValue('padding-bottom', 50, 25);
 
 
-    @include adaptiveValue('margin-bottom', 150, 50);
+    // @include adaptiveValue('margin-bottom', 150, 50);
 
     // .products__title
 
@@ -874,6 +929,7 @@
 
 .product {
 
+
     // .product__card
 
     &__card {
@@ -899,6 +955,8 @@
     &__card-image {
         position: relative;
         border-radius: 10px;
+        width: 100%;
+        aspect-ratio: 1 / 0.7;
 
         & img {
             width: 100%;
@@ -1139,6 +1197,8 @@
     // .social__rolling
 
     &__rolling {
+        border: 2px solid red;
+
         // border: 1px solid red;
         // min-width: 120vw;
     }

@@ -430,7 +430,7 @@ export function menuInit() {
          if (e.target.closest('.icon-menu')) {
             bodyLockToggle();
             document.documentElement.classList.toggle("menu-open");
-         } else if (bodyLockStatus && !e.target.closest('.header__menu')) {
+         } else if (document.documentElement.classList.contains("menu-open") && !e.target.closest('.header__menu')) {
             bodyUnlock();
             document.documentElement.classList.remove("menu-open");
          }

@@ -138,11 +138,12 @@ function initSliders() {
 	}
 
 	if (document.querySelector('#timerSlider')) {
-		const customersSlider = new Swiper('#timerSlider', {
+		const timerSlider = new Swiper('#timerSlider', {
 			autoHeight: false,
 			parallax: true,
 			loop: !0,
 			speed: 800,
+			autoplay: true,
 			pagination: {
 				el: '.swiper-pagination',
 				clickable: true,
@@ -159,11 +160,15 @@ function initSliders() {
 
 
 			breakpoints: {
+				320: {
+					slidesPerView: 1.35,
+
+				},
 				480: {
-					// slidesPerView: 'auto',
 					// centeredSlides: true,
 				},
 				768: {
+					slidesPerView: 'auto',
 				},
 				992: {
 					slidesPerView: 2.1,

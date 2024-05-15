@@ -76,6 +76,7 @@ $responsiveType: 1;
 
 
 body {
+   // min-height: 100%;
    overflow-x: hidden;
    padding-right: 0px !important;
    // &::-webkit-scrollbar {
@@ -197,6 +198,7 @@ body {
 // Для подключения/отключения конкретных стилей смотри base.scss
 //@import "base";
 
+@import "libs/locomotive-scroll.scss";
 // Подключение стилей общих элементов проекта
 @import "common";
 
@@ -207,7 +209,6 @@ body {
 // Подключение стилей отдельных страниц
 @import "home";
 
-@import "libs/locomotive-scroll.scss"
 
 
 //====================================================================================================================================================================================//

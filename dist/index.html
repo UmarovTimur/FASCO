@@ -19,7 +19,7 @@
 
    <div class="_circle _circle__cursor"></div>
    <div data-scroll-container id="smooth-wrapper" class="wrapper">
-      <header class="header">
+      <header data-scroll data-scroll-section data-scroll-speed='12' data-scroll-position="top" class="header">
    <div class="header__container">
       <a tabindex="1" href="#" class="header__logo">FASCO</a>
       <nav data-fullscreen class="header__menu">
@@ -67,7 +67,8 @@
       <!-- Cursor -->
 
       <main class="page">
-         <section class="ultimate-sale">
+         <section data-scroll data-scroll-section data-scroll-speed="10" data-scroll-position="top"
+            class="ultimate-sale">
             <div class="ultimate-sale__container">
                <div class="ultimate-sale__item">
                   <img src="img/1.png" alt="">
@@ -100,7 +101,7 @@
 
             </div>
          </section>
-         <section class="logos">
+         <section data-scroll-section class="logos">
             <div class="logos__wrapper" data-scroll="" data-scroll-direction="horizontal" data-scroll-speed="3"
                data-scroll-position="top">
                <div id="rolling-logos">
@@ -143,7 +144,160 @@
 
 
          </section>
-         <section data-tabs class="products products__container">
+         <!-- <section data-scroll-section class="timer">
+            <div class="timer__container">
+               <div class="timer__body">
+                  <div class="timer__text">
+                     <h3 class="timer__title">
+                        Deals Of The Month
+                     </h3>
+                     <p class="timer__subtitle">
+                        Time's ticking away on your chance to score major savings on the styles you love. Don't let
+                        these deals slip through your fingers - shop the sale now!
+                     </p>
+                     <div data-strength="25" data-strength-text="6" class="timer__button _button _magnets">
+                        <button class="timer__button-content _button-content">
+                           <div class="_magnets-text" href="#">
+                              Buy Now
+                           </div>
+                        </button>
+                     </div>
+                  </div>
+                  <div class="timer__clock">
+                     <h5 class="timer__clock-title">Hurry, Before It’s Too Late!</h5>
+                     <div class="timer__clock-container">
+                        <div class="timer__clock-item">
+                           <div id="timerDays" class="timer__clock-count">
+                              02
+                           </div>
+                           <div class="timer__clock-name">Days</div>
+                        </div>
+                        <div class="timer__clock-item">
+                           <div id="timerHours" class="timer__clock-count">
+                              06
+                           </div>
+                           <div class="timer__clock-name">Hr</div>
+                        </div>
+                        <div class="timer__clock-item">
+                           <div id="timerMinutes" class="timer__clock-count">
+                              05
+                           </div>
+                           <div class="timer__clock-name">Mins</div>
+                        </div>
+                        <div data-scroll-speed="1" class="timer__clock-item">
+                           <div id="timerSeconds" class="timer__clock-count">
+                              30
+                           </div>
+                           <div class="timer__clock-name">Sec</div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="timer__slider">
+                  <div id="timerSlider" class="timer__slider-flex-container swiper">
+                     <div class="timer__slider-conatiner swiper-wrapper">
+                        <div class="timer__slider-item swiper-slide">
+                           <div class="timer__slider-item-container">
+                              <img class="timer__slider-item-image" src="img/timer/image-1.png" alt="">
+
+                              <div data-swiper-parallax-x="-30%" data-swiper-parallax-y="70%"
+                                 data-swiper-parallax-opacity="0" class="timer__slider-item-body">
+
+                                 <h5 class="timer__slider-item-name">
+                                    01
+                                    <img src="img/timer/line.svg" alt="">
+                                    Spring Sale
+                                 </h5>
+                                 <div class="timer__slider-item-sale">
+                                    30% OFF
+                                 </div>
+                              </div>
+                           </div>
+
+                        </div>
+                        <div class="timer__slider-item swiper-slide">
+                           <div class="timer__slider-item-container">
+
+                              <img class="timer__slider-item-image" src="img/timer/image-2.png" alt="">
+
+                              <div data-swiper-parallax-x="-30%" data-swiper-parallax-y="70%"
+                                 data-swiper-parallax-opacity="0" class="timer__slider-item-body">
+
+                                 <h5 class="timer__slider-item-name">
+                                    02
+                                    <img src="img/timer/line.svg" alt="">
+                                    Winter Sale
+                                 </h5>
+                                 <div class="timer__slider-item-sale">
+                                    15% OFF
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="timer__slider-item swiper-slide">
+                           <div class="timer__slider-item-container">
+
+                              <img class="timer__slider-item-image" src="img/timer/image.png" alt="">
+
+                              <div data-swiper-parallax-x="-30%" data-swiper-parallax-y="70%"
+                                 data-swiper-parallax-opacity="0" class="timer__slider-item-body">
+
+                                 <h5 class="timer__slider-item-name">
+                                    03
+                                    <img src="img/timer/line.svg" alt="">
+                                    Summer Sale
+                                 </h5>
+                                 <div class="timer__slider-item-sale">
+                                    45% OFF
+                                 </div>
+                              </div>
+                           </div>
+
+                        </div>
+                        <div class="timer__slider-item swiper-slide">
+                           <div class="timer__slider-item-container">
+
+                              <img class="timer__slider-item-image" src="img/instagram/image-4.png" alt="">
+
+                              <div data-swiper-parallax-x="-30%" data-swiper-parallax-y="70%"
+                                 data-swiper-parallax-opacity="0" class="timer__slider-item-body">
+
+                                 <h5 class="timer__slider-item-name">
+                                    04
+                                    <img src="img/timer/line.svg" alt="">
+                                    Gig discount
+                                 </h5>
+                                 <div class="timer__slider-item-sale">
+                                    70% OFF
+                                 </div>
+                              </div>
+                           </div>
+
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="timer__slider-pagination swiper-pagination"></div>
+
+                  <div class="timer__slider-navigtaion">
+                     <div data-strength="25" data-strength-text="2"
+                        class="timer__slider-button-prev _magnets _slider-arrow">
+                        <div id="_circleFill" class="swiper-button-prev _slider-arrow__prev">
+                           <span class="_magnets-text"></span>
+                        </div>
+                     </div>
+                     <div data-strength="25" data-strength-text="2"
+                        class="timer__slider-button-next _magnets _slider-arrow">
+                        <div id="_circleFill" class="swiper-button-next _slider-arrow__next">
+                           <span class="_magnets-text"></span>
+                        </div>
+                     </div>
+
+                  </div>
+               </div>
+            </div>
+         </section>
+         <section data-scroll-section data-tabs class="products products__container">
             <h3 class="products__title">New Arrivals</h3>
             <p class="products__text">We have carefully selected high quality items for you from the best brands so that
                you can be assured of their impeccability.</p>
@@ -1858,161 +2012,8 @@
                </div>
             </div>
 
-         </section>
-         <section class="timer">
-            <div class="timer__container">
-               <div class="timer__body">
-                  <div class="timer__text">
-                     <h3 class="timer__title">
-                        Deals Of The Month
-                     </h3>
-                     <p class="timer__subtitle">
-                        Time's ticking away on your chance to score major savings on the styles you love. Don't let
-                        these deals slip through your fingers - shop the sale now!
-                     </p>
-                     <div data-strength="25" data-strength-text="6" class="timer__button _button _magnets">
-                        <button class="timer__button-content _button-content">
-                           <div class="_magnets-text" href="#">
-                              Buy Now
-                           </div>
-                        </button>
-                     </div>
-                  </div>
-                  <div class="timer__clock">
-                     <h5 class="timer__clock-title">Hurry, Before It’s Too Late!</h5>
-                     <div class="timer__clock-container">
-                        <div class="timer__clock-item">
-                           <div id="timerDays" class="timer__clock-count">
-                              02
-                           </div>
-                           <div class="timer__clock-name">Days</div>
-                        </div>
-                        <div class="timer__clock-item">
-                           <div id="timerHours" class="timer__clock-count">
-                              06
-                           </div>
-                           <div class="timer__clock-name">Hr</div>
-                        </div>
-                        <div class="timer__clock-item">
-                           <div id="timerMinutes" class="timer__clock-count">
-                              05
-                           </div>
-                           <div class="timer__clock-name">Mins</div>
-                        </div>
-                        <div class="timer__clock-item">
-                           <div id="timerSeconds" class="timer__clock-count">
-                              30
-                           </div>
-                           <div class="timer__clock-name">Sec</div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="timer__slider">
-                  <div id="timerSlider" class="timer__slider-flex-container swiper">
-                     <div class="timer__slider-conatiner swiper-wrapper">
-                        <div class="timer__slider-item swiper-slide">
-                           <div class="timer__slider-item-container">
-                              <img src="img/timer/image-1.png" alt="">
-
-                              <div data-swiper-parallax-x="-30%" data-swiper-parallax-y="70%"
-                                 data-swiper-parallax-opacity="0" class="timer__slider-item-body">
-
-                                 <h5 class="timer__slider-item-name">
-                                    01
-                                    <img src="img/timer/line.svg" alt="">
-                                    Spring Sale
-                                 </h5>
-                                 <div class="timer__slider-item-sale">
-                                    30% OFF
-                                 </div>
-                              </div>
-                           </div>
-
-                        </div>
-                        <div class="timer__slider-item swiper-slide">
-                           <div class="timer__slider-item-container">
-
-                              <img src="img/timer/image-2.png" alt="">
-
-                              <div data-swiper-parallax-x="-30%" data-swiper-parallax-y="70%"
-                                 data-swiper-parallax-opacity="0" class="timer__slider-item-body">
-
-                                 <h5 class="timer__slider-item-name">
-                                    02
-                                    <img src="img/timer/line.svg" alt="">
-                                    Winter Sale
-                                 </h5>
-                                 <div class="timer__slider-item-sale">
-                                    15% OFF
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="timer__slider-item swiper-slide">
-                           <div class="timer__slider-item-container">
-
-                              <img src="img/timer/image.png" alt="">
-
-                              <div data-swiper-parallax-x="-30%" data-swiper-parallax-y="70%"
-                                 data-swiper-parallax-opacity="0" class="timer__slider-item-body">
-
-                                 <h5 class="timer__slider-item-name">
-                                    03
-                                    <img src="img/timer/line.svg" alt="">
-                                    Summer Sale
-                                 </h5>
-                                 <div class="timer__slider-item-sale">
-                                    45% OFF
-                                 </div>
-                              </div>
-                           </div>
-
-                        </div>
-                        <div class="timer__slider-item swiper-slide">
-                           <div class="timer__slider-item-container">
-
-                              <img src="img/instagram/image-4.png" alt="">
-
-                              <div data-swiper-parallax-x="-30%" data-swiper-parallax-y="70%"
-                                 data-swiper-parallax-opacity="0" class="timer__slider-item-body">
-
-                                 <h5 class="timer__slider-item-name">
-                                    04
-                                    <img src="img/timer/line.svg" alt="">
-                                    Gig discount
-                                 </h5>
-                                 <div class="timer__slider-item-sale">
-                                    70% OFF
-                                 </div>
-                              </div>
-                           </div>
-
-                        </div>
-                     </div>
-                  </div>
-
-                  <div class="timer__slider-pagination swiper-pagination"></div>
-
-                  <div class="timer__slider-navigtaion">
-                     <div data-strength="25" data-strength-text="2"
-                        class="timer__slider-button-prev _magnets _slider-arrow">
-                        <div id="_circleFill" class="swiper-button-prev _slider-arrow__prev">
-                           <span class="_magnets-text"></span>
-                        </div>
-                     </div>
-                     <div data-strength="25" data-strength-text="2"
-                        class="timer__slider-button-next _magnets _slider-arrow">
-                        <div id="_circleFill" class="swiper-button-next _slider-arrow__next">
-                           <span class="_magnets-text"></span>
-                        </div>
-                     </div>
-
-                  </div>
-               </div>
-            </div>
-         </section>
-         <section class="benefits">
+         </section> -->
+         <!-- <section data-scroll-section class="benefits">
             <div class="benefits__container">
                <div class="benefits__item">
                   <div class="benefits__item-img">
@@ -2051,8 +2052,8 @@
                   </div>
                </div>
             </div>
-         </section>
-         <section class="social">
+         </section> -->
+         <section data-scroll-section class="social">
             <div class="social__text__container">
                <h3 class="social__title">Follow Us On Instagram</h3>
                <p class="social__text">
@@ -2060,7 +2061,7 @@
                </p>
             </div>
             <div class="social__rolling" data-scroll="" data-scroll-direction="horizontal" data-scroll-speed="-7"
-               data-scroll-position="center" data-scroll-target=".social">
+               data-scroll-position="bottom" data-scroll-target=".social">
 
                <div id="gallery-rolling" data-strength="40" data-vertical-magnets>
                   <div id="gallery-rolling-item">
@@ -2102,7 +2103,7 @@
             </div>
 
          </section>
-         <section class="customers">
+         <section data-scroll-section class="customers">
             <div class="customers__header customers__container">
                <h3 class="customers__title">This Is What Our Customers Say</h3>
                <h5 class="customers__subtitle">We do everything we can to make our customers happy</h5>
@@ -2262,10 +2263,9 @@
                </div>
             </div>
          </section>
-
       </main>
 
-      <footer class="footer">
+      <footer data-scroll-section data-scroll-speed='6' data-scroll-positoin="bottom" class="footer">
 	<div class="footer__container">
 		<div class="footer__body">
 			<a href="#" class="footer__logo">FASCO</a>
