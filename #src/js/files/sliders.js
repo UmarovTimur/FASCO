@@ -178,7 +178,7 @@ function initSliders() {
 			},
 		});
 	}
-	if (window.innerWidth > 991.98) {
+	if (window.innerWidth > 991.98 && document.querySelector('.timer__slider-pagination')) {
 		const timerSliderItem = document.querySelector('.timer__slider-item');
 		document.querySelector('.timer__slider-pagination').style.left = `${timerSliderItem.offsetWidth + 24}px`;
 	}

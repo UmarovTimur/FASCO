@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html translate="no" lang="en">
 
 @@include('html/_head.html',{
 "title":"Fasco"
@@ -15,8 +15,7 @@
       <!-- Cursor -->
 
       <main class="page">
-         <section data-scroll data-scroll-section data-scroll-speed="10" data-scroll-position="top"
-            class="ultimate-sale">
+         <section data-scroll-section data-scroll-position="top" class="ultimate-sale">
             <div class="ultimate-sale__container">
                <div class="ultimate-sale__item">
                   <img src="@img/1.png" alt="">
@@ -29,7 +28,7 @@
                   <h1>ULTIMATE</h1>
                   <h2>SALE</h2>
                   <h4>NEW COLLECTION</h4>
-                  <div data-strength="25" data-strength-text="6" class="ultimate-sale__button _button _magnets">
+                  <div data-strength="20" data-strength-text="4" class="ultimate-sale__button _button _magnets">
                      <button class="ultimate-sale__button-content _button-content">
                         <div class="_magnets-text" href="#">
                            SHOP NOW
@@ -89,10 +88,8 @@
 
                </div>
             </div>
-
-
          </section>
-         <!-- <section data-scroll-section class="timer">
+         <section data-scroll-section class="timer">
             <div class="timer__container">
                <div class="timer__body">
                   <div class="timer__text">
@@ -246,8 +243,11 @@
             </div>
          </section>
          <section data-scroll-section data-tabs class="products products__container">
-            <h3 class="products__title">New Arrivals</h3>
-            <p class="products__text">We have carefully selected high quality items for you from the best brands so that
+            <h3 class="products__title">New
+               Arrivals
+            </h3>
+            <p class="products__text">We have
+               carefully selected high quality items for you from the best brands so that
                you can be assured of their impeccability.</p>
 
 
@@ -1960,8 +1960,8 @@
                </div>
             </div>
 
-         </section> -->
-         <!-- <section data-scroll-section class="benefits">
+         </section>
+         <section data-scroll-section class="benefits">
             <div class="benefits__container">
                <div class="benefits__item">
                   <div class="benefits__item-img">
@@ -2000,18 +2000,18 @@
                   </div>
                </div>
             </div>
-         </section> -->
-         <section data-scroll-section class="social">
+         </section>
+         <section data-scroll-class="social" data-scroll-section class="social">
             <div class="social__text__container">
                <h3 class="social__title">Follow Us On Instagram</h3>
                <p class="social__text">
                   Subscribe to our instagram not to miss all the newest rings, be the first to know
                </p>
             </div>
-            <div class="social__rolling" data-scroll="" data-scroll-direction="horizontal" data-scroll-speed="-7"
-               data-scroll-position="bottom" data-scroll-target=".social">
+            <div class="social__rolling" data-scroll data-scroll-call="socialEvent" data-scroll-id="social__scroll"
+               data-scroll-direction="horizontal" data-scroll-speed="-4" data-scroll-position="center">
 
-               <div id="gallery-rolling" data-strength="40" data-vertical-magnets>
+               <div data-strength="40" data-vertical-magnets id="gallery-rolling">
                   <div id="gallery-rolling-item">
                      <div class="social__gallery">
                         <div class="social__gallery-container">
@@ -2209,6 +2209,28 @@
                      </div>
                   </div>
                </div>
+            </div>
+         </section>
+         <section data-scroll-section class="subscribe">
+            <div class="subscribe__container">
+               <div class="subscribe__image"><img src="@img/subscribe/image-1.png" alt=""></div>
+               <div class="subscribe__body">
+                  <h4 class="subscribe__title _title">Subscribe To Our Newsletter</h4>
+                  <p class="subscribe__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque duis
+                     ultrices sollicitudin aliquam sem. Scelerisque duis ultrices sollicitudin </p>
+                  <form class="subscribe__form" action="">
+                     <input type="email" class="subscribe__input" name="subscribe" id="subscribe-input"
+                        placeholder="michael@ymail.com">
+
+                     <div data-strength="20" data-strength-text="4" class="subscribe__button _button _magnet">
+                        <input type="submit" class="subscribe__button-content _button-content _magnets-text"
+                           value="Subscribe Now" />
+                     </div>
+                  </form>
+               </div>
+
+               <div class="subscribe__image"><img src="@img/subscribe/image-2.png" alt=""></div>
+
             </div>
          </section>
       </main>

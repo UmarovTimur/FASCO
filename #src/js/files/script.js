@@ -31,7 +31,7 @@ gsap.registerPlugin(ScrollTrigger);
 let scroll = new LocomotiveScroll({
   el: document.querySelector('[data-scroll-container]'),
   smooth: true,
-  getDirection: true
+  getDirection: true,
 });
 
 
@@ -273,7 +273,7 @@ function circleCursor(speed, smoothy) {
 
 function rollingText() {
   let rolling = document.getElementById("rolling-logos");
-  let rollingItem = document.querySelector("#rolling-logos-item");
+  let rollingItem = document.getElementById("rolling-logos-item");
   let direction = -1;
   let directionName = "down"; // top
 
@@ -309,8 +309,7 @@ function rollingText() {
 }
 
 function socialRolling() {
-  let direction = 1;
-  let directionName = "down"; // top
+  let directionName = "down"; // up
 
 
   let gallery = document.getElementById('gallery-rolling'),
@@ -321,24 +320,34 @@ function socialRolling() {
   }
 
   clone(galleryItem, gallery);
-  if (galleryItem.offsetWidth < window.innerWidth) {
+  clone(galleryItem, gallery);
+  if (galleryItem.offsetWidth * 1.3 < window.innerWidth) {
     clone(galleryItem, gallery);
   }
 
 
 
+  const socialRoll = roll(galleryItem, { duration: 10, ease: 'none' },
+    scroll.on('scroll', self => {
+      if (typeof self.currentElements['social__scroll'] === 'object') {
 
+        if (directionName != self.direction) {
+          let dir = self.direction == 'down' ? -1 : 1;
+          directionName = self.direction;
+          gsap.to(socialRoll, { timeScale: dir, overwrite: true });
+        }
 
-  const sociallRoll = roll(galleryItem, { duration: 10, ease: "none" }),
-    rollUpdate = scroll.on("scroll", (self) => {
-      console.log(self.scroll);
-      const SelfDirection = self.direction == "down" ? 1 : -1;
-      if (self.direction != directionName) {
-        gsap.to(sociallRoll, { timeScale: direction, overwrite: true });
-        directionName = self.direction;
-        direction = SelfDirection;
       }
-    });
+    })
+  );
+
+  // scroll.on('call', func => {
+  //   this.call(...func);
+  // });
+
+
+
+  gsap.to(socialRoll, { timeScale: -1, overwrite: true });
 
 
   function roll(element, option, update) {
@@ -355,7 +364,6 @@ function socialRolling() {
     timeline.to(gallery, {
       x: update ? element.offsetWidth : -element.offsetWidth,
       ...option,
-      y: 0
     });
 
     return timeline;
@@ -365,21 +373,36 @@ function socialRolling() {
 
 
   gallery.addEventListener('mousemove', (event) => {
-    const step = event.screenX <= window.innerWidth / 2 ? 1 : -1;
+    let step;
+    if (event.screenX <= window.innerWidth / 2) {
+      step = 1;
+      directionName = 'up';
+    } else {
+      step = -1;
+      directionName = 'down';
+    }
+
     const timeScale = (event.screenX - window.innerWidth / 2) / (window.innerWidth / 2);
 
-    gsap.to(sociallRoll, {
+
+    gsap.to(socialRoll, {
       timeScale: step + timeScale * -1.5,
       overwrite: true,
     });
+
   });
 
+
+  gallery.addEventListener("drag", (event) => {
+    event.preventDefault();
+    console.log(event);
+  });
   gallery.addEventListener('mouseenter', (event) => {
-    // sociallRoll.play();
+    // socialRoll.play();
     // now = 400 * (event.screenX / window.innerWidth - 0.5) * 2;
   });
   gallery.addEventListener('mouseleave', (event) => {
-    gsap.to(sociallRoll, {
+    gsap.to(socialRoll, {
       timeScale: event.screenX <= window.innerWidth / 2 ? 1 : -1,
       overwrite: true
     });
@@ -468,6 +491,9 @@ function timer() {
   }
 
   function seconds() {
+    if (!timer.sec) {
+      return;
+    }
     setTimeout(() => {
       if (+timer.sec.innerHTML <= 0) {
         minutes();
